@@ -1,0 +1,11 @@
+body {
+background: #000000;
+text-align: center;
+}
+#main {
+width: 1000px;
+height: 4000px;
+background: #ff7b00;
+margin: -15px auto;
+border: solid 10px #ff9600;
+}
