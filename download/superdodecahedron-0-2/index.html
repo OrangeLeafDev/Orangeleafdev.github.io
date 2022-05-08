@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<style>
+		div.sticky {
+			position: -webkit-sticky; /* Safari */
+			position: sticky;
+			top: 0;
+			width: auto;
+			height: 75px;
+			background: #050505;
+			margin: auto auto;
+		}	
+		button {
+			font-family: 'cartogothic std';
+			background-color: transparent;
+			color:white;
+			outline:none;
+			border:none;
+		</style>
+		<script>
+			function gotoElem(id,offset) {
+			  var elem = document.getElementById(id);
+			  var elemBound = elem.getBoundingClientRect();
+			  var elemCenter = (elemBound.top + elemBound.bottom) / 3
+			  if (offset != undefined) {
+				elemCenter += offset
+			  }
+			  window.scrollTo(0, elemCenter)
+			  console.log(elem)
+			  console.log(elemCenter)
+			}
+		</script>
+		<title>OrangeLeafDev Download File</title>
+		<link rel="icon" href="arc.png">
+	</head>
+	<body style="background-color:black;color:white;font-family: 'cartogothic std';text-align: center;">
+		<div class="sticky" style="font-size: 30px;">
+			<a href="https://orangeleafdev.github.io" target="_blank" rel="noopener noreferrer">
+			<img src="logo(x2).png" style="vertical-align:center;float:left;margin:8 10">
+			</a>
+			<p style="text-align: center;vertical-align:center;float:right;margin:20 10"> OrangeLeafDev </p>
+		</div>
+		<h3>Are you downloading "Super Dodecahedron Beta 0.2 Setup.exe"?</h3>
+		<h4>If you think what you are downloading is suspicious, please close this tab.</h4>
+		<a href="https://www.w3schools.com/images/myw3schoolsimage.jpg" download rel="noopener noreferrer" target="_blank">Super Dodecahedron Beta 0.2 Setup.exe</a>
+	</body>
+</html>
