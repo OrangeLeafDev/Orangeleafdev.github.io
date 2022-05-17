@@ -83,8 +83,29 @@
 			}
 		  }
 		  
+		  function fingerHandler(e) {
+			if (e.type == 'touchstart') {
+				var evt = (typeof e.originalEvent === 'undefined') ? e : e.originalEvent;
+				var touch = evt.touches[0] || evt.changedTouches[0];
+				if (touch.pageX > 960/2) {
+					rightPressed = true;
+				} else if (touch.pageX < 960/2) {
+					leftPressed = true;
+				}
+			} else if (e.type == 'touchend') {
+				var evt = (typeof e.originalEvent === 'undefined') ? e : e.originalEvent;
+				var touch = evt.touches[0] || evt.changedTouches[0];
+				if (touch.pageX > 960/2) {
+					rightPressed = false;
+				} else if (touch.pageX < 960/2) {
+					leftPressed = false;
+				}
+			}
+		  }
+		  
 		  document.addEventListener("keydown", keyDownHandler, false);
 		  document.addEventListener("keyup", keyUpHandler, false);
+		  document.addEventListener("touchme", fingerHandler, false);
 		  
 		  // collision detect
 		  
