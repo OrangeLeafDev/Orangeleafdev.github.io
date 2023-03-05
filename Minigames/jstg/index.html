@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OL36 - JS Test Game</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		body {
+            background-color: #1a1e25;
+            color: #ffb347; /* dark-orange color */
+            font-family: Consolas, monospace;
+            font-size: 18px;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #output {
+            display: flex;
+            flex-grow: 1;
+            overflow-y: scroll;
+            padding: 10px;
+            word-wrap: break-word;
+        }
+
+        #stats {
+            position: relative;
+            bottom: 0%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: row; /* Updated */
+            justify-content: center;
+            padding: 10px 0; /* Updated */
+            border-bottom: 1px solid #ffb347; /* dark-orange color */
+            text-align: center; /* Center the text */
+        }
+
+        #stats p {
+            margin: 0;
+        }
+
+        #buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            
+        }
+
+        button {
+            background-color: #4a4d58; /* darker shade of grey */
+            border: none;
+            color: #ffb347; /* dark-orange color */
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 10px;
+            padding: 10px 20px; /* Updated */
+            border-radius: 5px;
+            font-family: "Calibri";
+        }
+
+        button:hover {
+            background-color: #6e717f; /* darker shade of grey */
+        }
+        
+        #quit {
+            display: flex;
+            align-self: flex-start;
+            margin: 10px;
+        }
+
+        .flash {
+            animation: flash 0.5s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes flash {
+            from {
+                background-color: #000000;
+            }
+            to {
+                background-color: #1a1e25;
+            }
+        }
+
+        #main {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        #mainMenu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #statMenu {
+            position: relative;
+            display: inline-flex;
+            top: -7px;
+            align-items: center;
+            justify-content: center;
+            height: 90%;
+            width: 80px;
+        }
+        #statMenuImg {
+            position: relative;
+            top: 1px;
+            margin-left: 10px;
+        }
+
+        .sticky {
+            position: sticky;
+            top: 0;
+            display: flex;
+            
+            align-items: center;
+            background-color: black;
+            color: white;
+            padding: 10px;
+            font-family: pixicType;
+            font-size: larger;
+        }
+
+        .sticky img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        @font-face {
+            font-family: pixicType;
+            src: url('font/piconsolas-mono.ttf') format('truetype');
+        }
+
+
+		
+	</style>
+
+</head>
+
+<body>
+    <div class="sticky" href="">
+        <img src="orangeleafdevboards-export.png" alt="OL36">
+        <div>
+            OrangeLeafDev
+        </div>
+        <div style="margin-left: auto;">Javascript Test Game</div>
+    </div>
+    <div id="main" class="scene hidden">
+        <button id="quit">Quit</button>
+        <div id="output"></div>
+        <div id="stats"></div>
+        <div id="buttons"></div>
+    </div>
+    <div id="mainMenu" class="scene">
+        <button onclick="newSave()">New</button>
+        <button onclick="loadSave()">Load</button>
+    </div>
+	<script>
+        const COOLDOWN_MS = 1000;
+
+        let flags = {
+            "true":"true"
+        }
+        // Define the player stats as a dictionary
+        let playerStats = {
+            "name": "guest",
+            "health": "WORK",
+            "strength": "IN",
+            "defense": "PROGRESS"
+        };
+
+        let rooms = {
+            "roomx0y0-start": [
+                "You are in a pitch black room.",
+                {"type": "button", "conditions":[["wentNorth", "!=", "true"]], "text": "Go north", "destination": "roomx0y1", "colors": ["#f6b629", "#111111"]},
+                {"type": "button", "conditions":[["wentNorth", "==", "true"]], "text": "Go east", "destination": "roomx1y0-A", "colors": ["#f6b629", "#111111"]},
+                {"type": "button", "conditions":[["true", "==", "true"]], "text": "Stay.", "destination": "roomx0y0-start", "colors": ["#f6b629", "#111111"]},
+                {"type": "text", "conditions":[["wentNorth", "!=", "true"]], "text":"You can only see a door to the north."},
+                {"type": "text", "conditions":[["device", "==", "none"]], "text":"You have been moved back to the start."},
+                {"type": "text", "conditions":[["wentNorth", "==", "true"]], "text":"The door to the north is gone. You see a door to the east"}
+            ],
+            "roomx0y1": [
+                "You are in a room. It is sealed in all directions except the way you came in.",
+                {"type": "button", "conditions":[["true", "==", "true"]], "text": "Go south", "destination": "roomx0y0-start", "colors": ["#f6b629", "#111111"]},
+                {"type": "text", "conditions":[["wentNorth", "!=", "true"]], "text":"There is a door to the south."},
+                {"type": "declare", "conditions":[["true", "==", "true"]], "setFlag":"wentNorth", "value":"true"}
+                ],
+            "roomx1y0-A" : [
+                "The room you entered is pitch white.",
+                {"type": "button", "conditions":[["true", "==", "true"]], "text": "...?", "destination": "roomx1y0-B", "colors": ["#f6b629", "#111111"]}
+                ],
+            "roomx1y0-B" : [
+                "Suddenly, a few pieces of paper appear afloat. One has a drawing of a computer, another has a drawing of a controller, the third one has a drawing of a phone, and the last one is blank.",
+                {"type": "text", "conditions":[["device", "==", "none"]], "text":"It seems like you have been here before."},
+                {"type": "declare", "conditions":[["true", "==", "true"]], "setFlag":"device", "value":""},
+                {"type": "button", "conditions":[["true", "==", "true"]], "text": "Computer", "destination": "roomx1y0-pc", "colors": ["#f6b629", "#111111"]},
+                {"type": "button", "conditions":[["true", "==", "true"]], "text": "Controller", "destination": "roomx1y0-console", "colors": ["#f6b629", "#111111"]},
+                {"type": "button", "conditions":[["true", "==", "true"]], "text": "Phone", "destination": "roomx1y0-mobile", "colors": ["#f6b629", "#111111"]},
+                {"type": "button", "conditions":[["device", "!=", "none"]], "text": "Blank", "destination": "roomx1y0-none", "colors": ["#f6b629", "#111111"]},
+                ],
+            "roomx1y0-pc" : [
+                "",
+                {"type": "declare", "conditions":[["true", "==", "true"]], "setFlag":"device", "value":"pc"},
+                {"type": "destination", "conditions":[["true", "==", "true"]], "destination":"roomx2y0"}
+                ],
+            "roomx1y0-console" : [
+                "",
+                {"type": "declare", "conditions":[["true", "==", "true"]], "setFlag":"device", "value":"console"},
+                {"type": "destination", "conditions":[["true", "==", "true"]], "destination":"roomx2y0"}
+                ],
+            "roomx1y0-mobile" : [
+                "",
+                {"type": "declare", "conditions":[["true", "==", "true"]], "setFlag":"device", "value":"mobile"},
+                {"type": "destination", "conditions":[["true", "==", "true"]], "destination":"roomx2y0"}
+                ],
+            "roomx1y0-none" : [
+                "",
+                {"type": "declare", "conditions":[["true", "==", "true"]], "setFlag":"wentNorth", "value":"false"},
+                {"type": "declare", "conditions":[["true", "==", "true"]], "setFlag":"device", "value":"none"},
+                {"type": "button", "conditions":[["true", "==", "true"]], "text": "...", "destination": "roomx0y0-start", "colors": ["#f6b629", "#111111"]}
+                ],
+            "roomx2y0" : [
+                "...",
+                {"type": "text", "conditions":[["device", "==", "pc"]], "text":"You decided to pick the computer."},
+                {"type": "text", "conditions":[["device", "==", "console"]], "text":"You chose the console."},
+                {"type": "text", "conditions":[["device", "==", "mobile"]], "text":"You have picked the phone."},
+                {"type": "text", "conditions":[["device", "==", "none"]], "text":"STOP BREAKING THE GAME GODDAMNINFAfhgfsdgsdh!"},
+                {"type": "button", "conditions":[["device", "==", "pc"]], "text": "...", "destination": "loopPC", "colors": ["#f6b629", "#111111"]},
+                {"type": "button", "conditions":[["device", "==", "console"]], "text": "...", "destination": "loopCO", "colors": ["#f6b629", "#111111"]},
+                {"type": "button", "conditions":[["device", "==", "mobile"]], "text": "...", "destination": "loopMO", "colors": ["#f6b629", "#111111"]},
+                ],
+            "loopPC" : [
+                "... Pick your OS.",
+                {"type": "button", "conditions":[["true", "==", "true"]], "text": "Windows", "destination": "pc-win", "colors": ["#f6b629", "#111111"]},
+                {"type": "button", "conditions":[["true", "==", "true"]], "text": "Mac", "destination": "pc-mac", "colors": ["#f6b629", "#111111"]},
+                {"type": "button", "conditions":[["true", "==", "true"]], "text": "Linux", "destination": "pc-lin", "colors": ["#f6b629", "#111111"]},
+                ],
+        };
+
+        let cooldownTime = new Date().getTime();
+        let output = document.getElementById("output");
+        let buttons = document.getElementById("buttons");
+        let statsRow = document.getElementById("stats");
+
+        let currentScene = "mainMenu";
+        let currentRoom = "roomx0y0-start";
+
+        function newSave() {
+            localStorage.plRoom = currentRoom;
+            localStorage.plStats = JSON.stringify(playerStats);
+            localStorage.plFlags = JSON.stringify(flags);
+            updateScreen()
+            showScene("main");
+        }
+
+        function loadSave() {
+            currentRoom = localStorage.plRoom
+            playerStats = JSON.parse(localStorage.plStats)
+            flags = JSON.parse(localStorage.plFlags)
+            updateScreen()
+            showScene("main");
+        }
+
+        function showScene(sceneId) {
+			// Get all the scenes
+			const scenes = document.getElementsByClassName('scene');
+
+			// Hide all the scenes
+			for (let i = 0; i < scenes.length; i++) {
+				scenes[i].style.display = 'none';
+			}
+
+			// Show the specified scene
+			const scene = document.getElementById(sceneId);
+			scene.style.display = 'flex';
+            currentScene = sceneId
+		}
+
+        showScene(currentScene)
+
+
+        // Update the screen with the current room's output and buttons
+        function updateScreen() {
+            // Clear the output and buttons divs
+            output.innerHTML = "";
+            buttons.innerHTML = "";
+
+            // Add the current room's output text to the output div
+            let outputText = document.createTextNode(rooms[currentRoom][0]);
+            output.appendChild(outputText);
+
+            // Add the player stats to a new row
+            statsRow.innerHTML = `Health: ${playerStats["health"]}, Strength: ${playerStats["strength"]}, Defense: ${playerStats["defense"]}`;
+            // Create a new button element and set its properties
+            let button = document.createElement("button");
+            button.innerHTML = "Menu <img id= 'statMenuImg' src='menuIcon.png' alt='MENU' width=25%>";
+            button.style.display = "inline-button";
+            button.id = "statMenu"
+            button.addEventListener("click", function() {
+                console.log("Button clicked");
+            });
+
+            // Append the button to the stats div
+            statsRow.appendChild(button);
+
+            // Add a button for each available direction in the current room to the buttons div
+            for (let direction of rooms[currentRoom].slice(1)) {
+                let flagsTrue = false;
+                for (let curFlags of direction["conditions"]) {
+                    if (eval(`"${flags[curFlags[0]]}" ${curFlags[1]} "${curFlags[2]}"`)) {
+                        flagsTrue = true;
+                    }
+                };
+                if (flagsTrue) {
+                    if (direction["type"] == "button") {
+                        let button = document.createElement("button");
+                        button.innerHTML = direction["text"];
+                        button.style.backgroundColor = direction["colors"][0];
+                        button.style.color = direction["colors"][1];
+                        button.addEventListener("click", function() {
+                            if (new Date().getTime()-cooldownTime > COOLDOWN_MS) {
+                                cooldownTime = new Date().getTime()
+                                document.body.classList.add("flash");
+
+                                // Remove the "flash" class after the animation completes
+                                setTimeout(function() {
+                                    document.body.classList.remove("flash");
+                                }, 500);
+                                currentRoom = direction["destination"];
+                                localStorage.plRoom = currentRoom;
+                                updateScreen();
+                            }
+                        });
+                        buttons.appendChild(button);
+                    } else if (direction["type"] == "declare") {
+                        flags[direction["setFlag"]] = direction["value"];
+                        localStorage.plFlags = JSON.stringify(flags)
+                    } else if (direction["type"] == "text") {
+                        output.appendChild(document.createElement("br"));
+                        output.appendChild(document.createTextNode(`\n${direction["text"]}`));
+                    } else if (direction["type"] == "destination") {
+                        currentRoom = direction["destination"];
+                        localStorage.plRoom = currentRoom;
+                        updateScreen();
+                    };
+                };
+            };
+            console.log(currentRoom)
+        }
+
+        // Call the updateScreen function to display the initial room
+        updateScreen();
+
+        // Add an event listener to the Quit button to exit the game
+        let quitButton = document.getElementById("quit");
+        quitButton.addEventListener("click", function() {
+            window.close();
+        });
+    </script>
+</body>
+</html>

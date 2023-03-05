@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Room Creator</title>
+    <link rel="stylesheet" href="room-generator.css">
+</head>
+<body>
+    <h1>Room Creator</h1>
+    <form id="room-form">
+        <label for="room-name">Room Name:</label>
+        <input type="text" id="room-name" name="room-name"><br><br>
+        <label for="room-description">Room Description:</label>
+        <input type="text" id="room-description" name="room-description"><br><br>
+        <label for="door-direction">Door Direction:</label>
+        <select id="door-direction" name="door-direction">
+            <option value="north">North</option>
+            <option value="south">South</option>
+            <option value="east">East</option>
+            <option value="west">West</option>
+        </select><br><br>
+        <label for="door-text">Door Text:</label>
+        <input type="text" id="door-text" name="door-text"><br><br>
+        <label for="destination-room">Destination Room:</label>
+        <input type="text" id="destination-room" name="destination-room"><br><br>
+        <label for="flag-name">Flag Name:</label>
+        <input type="text" id="flag-name" name="flag-name"><br><br>
+        <label for="flag-value">Flag Value:</label>
+        <input type="text" id="flag-value" name="flag-value"><br><br>
+        <label for="button-color">Button Color:</label>
+        <input type="color" id="button-color" name="button-color"><br><br>
+        <button type="button" id="add-door-button">Add Door</button>
+        <button type="submit" id="create-room-button">Create Room</button>
+    </form>
+
+    <div id="rooms-container"></div>
+
+    <script src="room-generator.js"></script>
+</body>
+</html>
