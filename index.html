@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta content="OrangeLeafStudios" property="og:title" />
-<meta content="by OrangeLeaf36 :)" property="og:description" />
-<meta content="https://orangeleafdev.github.io" property="og:url" />
-<meta content="logo(2x).png" property="og:image" />
-<meta content="#d19b36" data-react-helmet="true" name="theme-color" />
   <title>OrangeLeafDev</title>
   <style>
     body {
-      font-family: Calibri, sans-serif;
+      font-family: pixelconsolas, Calibri, sans-serif;
       margin: 0;
       padding: 0;
+      background-image: linear-gradient(to right, #302010, black, #102010);
       color: #fff;
-      background-color: #201510;
     }
     
     #navbar {
@@ -21,6 +16,7 @@
       color: #fff;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 10px;
     }
     
@@ -38,14 +34,32 @@
     #navbar ul li a {
       color: #fff;
       text-decoration: none;
+      font-size: 2.5vw; /* Default font size for desktop */
     }
     
     #navbar ul li a:hover {
       text-decoration: underline;
     }
     
+    #navbar ul li#brand {
+      display: flex;
+      align-items: center;
+    }
+    
+    #navbar ul li#brand a {
+      font-size: 3vw;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+
+    #navbar img {
+      max-height: 8vw; /* Set the maximum height of the image */
+      margin-right: 10px;
+    }
+    
     #content {
       padding: 20px;
+      font-size: 20px;
     }
     
     #footer {
@@ -62,17 +76,39 @@
       color: #fff;
       text-decoration: none;
     }
+    
+    @media (max-width: 800px) {
+      /* Mobile-specific font size */
+      #navbar ul li a {
+        font-size: 4vw;
+      }
+      
+      #navbar ul li#brand a {
+        font-size: 0; /* Hide the text in mobile view */
+      }
+      
+      #content {
+        font-size: 4vh;
+      }
+      
+    }
+    @font-face {
+      font-family: "pixelconsolas";
+      src: url(piconsolas.woff);
+    }
   </style>
 </head>
 <body>
   <div id="navbar">
-    <ul><a href="https://orangeleafdev.github.io" target="_blank" rel="noopener noreferrer">
-				<img src="logo(2x).png" style="vertical-align:center;float:left;margin:0 0">
-				</a>
-				<p style="text-align: center;vertical-align:center;float:left;margin:20 10"> OrangeLeaf36 </p>
+    <ul>
+      <li id="brand">
+        <a href="/" target="_blank" rel="noopener noreferrer">
+          <img src="https://orangeleafdev.github.io/chiptune/logo(2x).png" style="vertical-align: middle; float: left; margin: 0 0;">
+        </a>
+        <a href="/">OrangeLeaf36</a>
+      </li>
     </ul>
     <ul>
-      <li><a href="/">Home</a></li>
       <li><a href="/chiptune">Chiptune</a></li>
       <li><a href="/works">My Works</a></li>
       <li><a href="https://jingleberry.ddns.net">JB Productions</a></li>
