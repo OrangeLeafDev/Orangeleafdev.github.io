@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6173214386682096"
+       crossorigin="anonymous"></script>
+  <title>OrangeLeafDev</title>
+  <link rel="icon" href="logo(2x).png">
+  <style>
+    body {
+      font-family: Calibri, consolas, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: linear-gradient(to right, #301010, black, #301010);
+      color: #fff;
+    }
+    
+    #navbar {
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      position: sticky; /* Make the navbar sticky */
+      top: 0; /* Position it at the top */
+      z-index: 1; /* Set a higher z-index to keep it above other elements */
+    }
+    
+    #navbar ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+    
+    #navbar ul li {
+      margin-right: 15px;
+    }
+    
+    #navbar ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 2.5vw; /* Default font size for desktop */
+    }
+    
+    #navbar ul li a:hover {
+      text-decoration: underline;
+    }
+    
+    #navbar ul li#brand {
+      display: flex;
+      align-items: center;
+    }
+    
+    #navbar ul li#brand a {
+      font-size: 3vw;
+      margin-left: 10px;
+    }
+
+    #navbar img {
+      max-height: 8vw; /* Set the maximum height of the image */
+      margin-left: 10px;
+    }
+    
+    #content {
+      padding: 20px;
+      font-size: 20px;
+      margin-top: 70px; /* Add margin to content to prevent overlap with sticky navbar */
+      text-align: center;
+    }
+    
+    #footer {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+    
+    #footer a {
+      color: #fff;
+      text-decoration: none;
+    }
+    
+   	#content a[href] {
+      color: orange !important;
+    }
+    
+    #navbar a[href]:not(.exclude) {
+      background: linear-gradient(to right, #ffaa33, white, white);
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+    }
+    
+    #navbar a[href]:not(.exclude):hover {
+      background: linear-gradient(to left, #88ff88, white, white);
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 800px) {
+      /* Mobile-specific font size */
+      #navbar ul li a {
+        font-size: 4vw;
+      }
+      
+      #navbar ul li#brand a {
+        font-size: 0; /* Hide the text in mobile view */
+      }
+      
+      #content {
+        font-size: 4vh;
+      }
+      
+    }
+    @font-face {
+      font-family: "pixelconsolas";
+      src: url(piconsolas.woff);
+    }
+  </style>
+</head>
+<body>
+  <div id="navbar">
+    <ul>
+      <li id="brand">
+        <a href="/">
+          <img src="https://orangeleafdev.github.io/chiptune/logo(2x).png" style="vertical-align: middle; float: left; margin: 0 -5%;">
+        </a>
+        <a href="/" class="exclude">OrangeLeaf36</a>
+      </li>
+    </ul>
+    <ul>
+      <li><a href="/chiptune">Chiptune</a></li>
+      <li><a href="/works">My Works</a></li>
+      <li><a href="https://jingleberry.ddns.net">JB Productions</a></li>
+    </ul>
+  </div>
+  
+  <div id="content">
+    <h1>404 - Page not found</h1>
+    <h3>This page does not exist, bud.</h3>
+    You could just go back by clicking any of the texts at the navbar.
+  </div>
+</body>
+</html>
