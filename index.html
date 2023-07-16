@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6173214386682096"
-       crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6173214386682096" crossorigin="anonymous"></script>
   <title>OrangeLeafDev</title>
   <link rel="icon" href="logo(2x).png">
   <style>
@@ -21,9 +20,9 @@
       justify-content: space-between;
       align-items: center;
       padding: 10px;
-      position: sticky; /* Make the navbar sticky */
-      top: 0; /* Position it at the top */
-      z-index: 1; /* Set a higher z-index to keep it above other elements */
+      position: sticky;
+      top: 0;
+      z-index: 1;
     }
     
     #navbar ul {
@@ -40,7 +39,7 @@
     #navbar ul li a {
       color: #fff;
       text-decoration: none;
-      font-size: 2.5vw; /* Default font size for desktop */
+      font-size: 2.5vw;
     }
     
     #navbar ul li a:hover {
@@ -58,14 +57,14 @@
     }
 
     #navbar img {
-      max-height: 8vw; /* Set the maximum height of the image */
+      max-height: 8vw;
       margin-left: 10px;
     }
     
     #content {
       padding: 20px;
       font-size: 20px;
-      margin-top: 70px; /* Add margin to content to prevent overlap with sticky navbar */
+      margin-top: 70px;
     }
     
     #footer {
@@ -83,7 +82,7 @@
       text-decoration: none;
     }
     
-   	#content a[href] {
+    #content a[href] {
       color: orange !important;
     }
     
@@ -101,23 +100,42 @@
     }
     
     @media (max-width: 800px) {
-      /* Mobile-specific font size */
       #navbar ul li a {
         font-size: 4vw;
       }
       
       #navbar ul li#brand a {
-        font-size: 0; /* Hide the text in mobile view */
+        font-size: 0;
       }
       
       #content {
         font-size: 4vh;
       }
-      
     }
+    
     @font-face {
       font-family: "pixelconsolas";
-      src: url(piconsolas.woff);
+      src: url("https://orangeleafdev.github.io/piconsolas.woff");
+    }
+    
+    /* Additional styles for the headline */
+    #headline {
+      background-image: url("https://orangeleafdev.github.io/bgImg.png");
+      background-size: cover;
+      background-position: center;
+      background-color: rgba(75,75,75,0.5);
+	  background-blend-mode: multiply;
+      text-align: center;
+      padding: 50px 0;
+      margin: 0 -50vw;
+      width: 200vw;
+      border-bottom: 4vh solid #000;
+    }
+    
+    #headline h1 {
+      font-size: 48px;
+      color: white;
+      font-family: consolas !important;
     }
   </style>
 </head>
@@ -138,13 +156,17 @@
     </ul>
   </div>
   
+  <div id="headline">
+    <h1>orangeleafdev</h1>
+  </div>
+  
   <div id="content">
-    <h1>OrangeLeafStudios</h1>
-    <p>Welcome to the personal works collection of OrangeLeaf36</p>
+  <h2>
+  The Development and Portfolio site of OrangeLeaf36
+  </h2>
+    Welcome to OrangeLeaf36's portfolio and collection of works.
     <p>It includes all my games, music, art, and other websites too!</p>
-    Want a break from the ads? if you tap <a href="https://www.youtube.com/@ornglef36">here</a> to check out my youtube, you'll receive 30 minutes of ad-free browsing (nope).
-    <br><br>
-    Never gonna give you up, Never gonna let you down, Never gonna run around and desert you. Never gonna make you cry, Never gonna say goodbye, Never gonna run around and hurt you.
+    Such as all my Scratch projects during early pandemic, all my music compositions, every platform I have an account on, every artwork I have ever made, along with every game development project as of mid-late 2023. 
   </div>
 </body>
 </html>
