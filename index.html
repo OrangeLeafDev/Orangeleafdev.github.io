@@ -1,174 +1,303 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6173214386682096" crossorigin="anonymous"></script>
-  <title>OrangeLeafDev</title>
-  <link rel="icon" href="https://orangeleafdev.github.io/chiptune/logo(2x).png">
-  <style>
-    @import url('https://fonts.googleapis.com/css?family=Inconsolata&display=swap');
-    body {
-      font-family: Calibri, consolas, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-image: linear-gradient(to right, #302010, black, #102010);
-      color: #fff;
-      overflow-x:hidden;
-    }
-    
-    #navbar {
-      background-color: #000;
-      color: #fff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px;
-      position: sticky;
-      top: 0;
-      z-index: 1;
-    }
-    
-    #navbar ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-    }
-    
-    #navbar ul li {
-      margin-right: 15px;
-    }
-    
-    #navbar ul li a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 2.5vw;
-    }
-    
-    #navbar ul li a:hover {
-      text-decoration: underline;
-    }
-    
-    #navbar ul li#brand {
-      display: flex;
-      align-items: center;
-    }
-    
-    #navbar ul li#brand a {
-      font-size: 3vw;
-      margin-left: 10px;
-    }
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>OrangeLeaf36</title>
+        <link rel="icon" href="https://orangeleafdev.github.io/chiptune/logo(2x).png">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap">
+        <style>
+            body {
+                animation: bodyWhite ease 2s;
+                font-family: 'Inconsolata', monospace;
+                margin: 0;
+                overflow: hidden;
+                background-color: black;
+            }
+            canvas {
+                display: block;
+            }
+            #header {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+                color: #fff;
+                z-index: 2;
+                max-width: 80%; /* Set a maximum width for the header */
+                margin: 0 calc(auto + 24px); /* Center the header horizontally */
 
-    #navbar img {
-      max-height: 8vw;
-      margin-left: 10px;
-    }
-    
-    #content {
-      padding: 20px;
-      font-size: 20px;
-      margin-top: 70px;
-    }
-    
-    #footer {
-      background-color: #333;
-      color: #fff;
-      padding: 10px;
-      text-align: center;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-    
-    #footer a {
-      color: #fff;
-      text-decoration: none;
-    }
-    
-    #content a[href] {
-      color: orange !important;
-    }
-    
-    #navbar a[href]:not(.exclude) {
-      background: linear-gradient(to right, #ffaa33, white, white);
-      -webkit-text-fill-color: transparent;
-      -webkit-background-clip: text;
-    }
-    
-    #navbar a[href]:not(.exclude):hover {
-      background: linear-gradient(to left, #88ff88, white, white);
-      -webkit-text-fill-color: transparent;
-      -webkit-background-clip: text;
-      text-decoration: underline;
-    }
-    
-    @media (max-width: 800px) {
-      #navbar ul li a {
-        font-size: 4vw;
-      }
-      
-      #navbar ul li#brand a {
-        font-size: 0;
-      }
-      
-      #content {
-        font-size: 4vh;
-      }
-    }
-    
-    @font-face {
-      font-family: "pixelconsolas";
-      src: url("https://orangeleafdev.github.io/piconsolas.woff");
-    }
-    
-    /* Additional styles for the headline */
-    #headline {
-      background-image: url("bgImg.png");
-      background-size: cover;
-      background-position: center;
-      background-color: rgba(75,75,75,0.5);
-      background-blend-mode: multiply;
-      text-align: center;
-      padding: 50px 0;
-      /* Remove the negative margin and set a fixed width */
-      width: 100%;
-      border-bottom: 4vh solid #000;
-    }
-    
-    #headline h1 {
-      font-size: 48px;
-      color: white;
-      font-family: consolas, inconsolata !important;
-    }
-  </style>
-</head>
-<body>
-  <div id="navbar">
-    <ul>
-      <li id="brand">
-        <a href="/">
-          <img src="https://orangeleafdev.github.io/chiptune/logo(2x).png" style="vertical-align: middle; float: left; margin: 0 -5%;">
-        </a>
-        <a href="/" class="exclude">OrangeLeaf36</a>
-      </li>
-    </ul>
-    <ul>
-      <li><a href="/chiptune">Chiptune</a></li>
-      <li><a href="/works">My Works</a></li>
-      <li><a href="https://jingleberry.ddns.net">JB Productions</a></li>
-    </ul>
-  </div>
-  <div id="headline">
-    <h1>orangeleafdev</h1>
-  </div>
-  
-  <div id="content">
-  <h2>
-  The Development and Portfolio site of OrangeLeaf36
-  </h2>
-    Welcome to OrangeLeaf36's portfolio and collection of works.
-    <p>It includes all my games, music, art, and other websites too!</p>
-    Such as all my Scratch projects during early pandemic, all my music compositions, every platform I have an account on, every artwork I have ever made, along with every game development project as of mid-late 2023. 
-  </div>
-</body>
+            }
+            #header p {
+                text-align: center;
+                overflow: hidden;
+                white-space: nowrap;
+                position: relative; /* Add relative positioning */
+                /* margin-bottom: 30px; /* Add some space below the <p> */
+            }
+            #name {
+                justify-content: center;
+                align-items: center;
+                display: flex;
+            }
+            #name h1 {
+                margin-top: 35px;
+            }
+            #logo {
+                max-height: 100%;
+                height: auto;
+                display: inline-block; /* Display logo as inline-block */
+                margin-right: 10px; /* Add margin to separate logo from text */
+            }
+            .border {
+                animation: slideOutAnim cubic-bezier(0.4, 0, 0.2, 1) 3s;
+                animation-fill-mode: backwards;
+                position: absolute;
+                width: 100%;
+                background-color: #fff;
+                opacity: 0;
+                z-index: 3;
+            }
+            .border:nth-child(1) {
+                margin-top: 0px;
+            }
+            .border:nth-child(2) {
+                margin-bottom: 0px;
+                transform: translate(0%, calc(100vh - 100%));
+            }
+            @keyframes slideOutAnim {
+                0% {
+                    background-color: #000;
+                    opacity: 1;
+                    height: 50%
+                }
+                25% {
+                    background-color: #fff;
+                    opacity: 1;
+                    height: 50%;
+                }
+                100% {
+                    opacity: 1;
+                    height: 0%;
+                }
+            }
+            
+            img { /* remove blur on pixelated, courtesy of SO */
+                image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
+                image-rendering: -moz-crisp-edges;          /* Firefox                        */
+                image-rendering: -o-crisp-edges;            /* Opera                          */
+                image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+                image-rendering: pixelated;                 /* Universal support since 2021   */
+                image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
+                -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
+            }
+
+            #header p span {
+                position: relative;
+                display: inline-block;
+                cursor: pointer;
+                padding: 3px;
+                z-index: 2;
+                /* Removes Highlight */
+                -webkit-user-select: none; /* Safari */
+                -ms-user-select: none; /* IE 10 and IE 11 */
+                user-select: none; /* Standard syntax */
+            }
+
+            #header p span::before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 2px;
+                bottom: 0;
+                left: 0;
+                background-color: #fff;
+                color: #fff;
+                transform: scaleX(0);
+                transform-origin: bottom right;
+                transition: transform 0.3s ease-out, background-color 0.3s ease-out;
+            }
+
+            #header p span:nth-child(1)::before {
+                background-color: #e38314; /* Unique color for the first dropdown */
+            }
+
+            #header p span:nth-child(2)::before {
+                background-color: #1ed630; /* Unique color for the second dropdown */
+            }
+
+            #header p span:nth-child(3)::before {
+                background-color: #a731d6; /* Unique color for the third dropdown */
+            }
+
+            #header p span:nth-child(1).active {
+                background-color: #e38314; /* Unique color for the first dropdown */
+            }
+
+            #header p span:nth-child(2).active {
+                background-color: #1ed630; /* Unique color for the second dropdown */
+            }
+
+            #header p span:nth-child(3).active {
+                background-color: #a731d6; /* Unique color for the third dropdown */
+            }
+
+            #header p span:hover::before,
+            #header p span.active::before {
+                transform: scaleX(1);
+                transform-origin: bottom left;
+            }
+
+            .dropdown-content {
+                display: block;
+                position: absolute;
+                background-color: #fff;
+                color: #000;
+                padding: 10px;
+                z-index: 100;
+                width: calc(100% - 20px);
+                top: 0;
+                text-align: center;
+                transform: translateY(calc(37.33 * 4px));
+                opacity: 0;
+                transition: 
+                transform 0.3s ease-in-out,
+                opacity 0.3s ease-in-out
+                ;
+                z-index: 1;
+            }
+            
+
+            .dropdown-content.hidden {
+                transform: translateY(calc(37.33 * 5px));
+                opacity: 1;
+            }
+
+            .latestDate {
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+                color: white;
+                text-align: right;
+            }
+
+            a:link {
+                color: #e38314;
+                background-color: transparent;
+                text-decoration: none;
+            }
+            a:visited {
+                color: #a731d6;
+                background-color: transparent;
+                text-decoration: none;
+            }
+            a:hover {
+                color: #ffffff;
+                background-color: transparent;
+                text-decoration: underline;
+            }
+            a:active {
+                color: #1ed630;
+                background-color: transparent;
+                text-decoration: underline;
+            }
+            
+            @media (max-width: 800px) {
+                /* Adjust styles for smaller screens */
+                #header {
+                    max-width: 100%; /* Allow header to take full width on smaller screens */
+                }
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="header">
+            <div id="name">
+                <img id="logo" src="https://orangeleafdev.github.io/chiptune/logo(4x)-export.png" alt="Your Logo">
+                <h1>
+                    <span style="color:#e38314">orange</span
+                        ><span style="color:#1ed630">leaf</span
+                        ><span style="color:#a731d6">36</span>
+                </h1>
+            </div>
+            <hr>
+            <p>
+                <span id="devSpan" onclick="toggleDropdown('devSpan')">Software Developer</span> | 
+                <span id="composerSpan" onclick="toggleDropdown('composerSpan')">Digital Producer</span> | 
+                <span id="artistSpan" onclick="toggleDropdown('artistSpan')">Pixel Artist</span>
+                <div id="devSpanDropdown" class="dropdown-content">
+                    Game Development <br>
+                    [insert projects] <br>
+                    Python projects <br>
+                    [insert project]
+                </div>
+                <div id="composerSpanDropdown" class="dropdown-content">
+                    FL Studio <br>
+                    [insert music] <br>
+                    Ultrabox <br>
+                    [insert music] <br>
+                    <a href="/chiptune">chiptune</a>
+                </div>
+                <div id="artistSpanDropdown" class="dropdown-content">
+                    Aseprite <br>
+                    [insert art] <br>
+                    Krita <br>
+                    [insert art] <br>
+                    Canva <br>
+                    [insert design]
+                </div>
+            </p>
+            <h2>Coming Soon</h2>
+            <div style="background-color: #0f0f0f">
+                <a href="https://www.youtube.com/@orangeleaf36plus">yt</a> |
+                <a href="https://twitter.com/ornglef36">twitter</a> |
+                <a href="https://discord.gg/H9q8Q9jE9p">discord</a> |
+                <a href="https://github.com/OrangeLeafDev">github</a> |
+                <a href="/works">my misc works</a> |
+                <a href="https://orangeleafstudios.github.io/">JB Manga</a>
+            </div>
+            <!-- Add more sections for projects, skills, etc. -->
+        </div>
+        <div class="border">
+
+        </div>
+        <div class="border">
+
+        </div>
+        <div style="z-index: -1;" class="latestDate">
+            Updated since:
+            <br>
+            8:56 PM (GMT+8)
+            2/21/2024
+        </div>
+        <script>
+            function toggleDropdown(spanId) {
+                var span = document.getElementById(spanId);
+                var dropdown = document.getElementById(spanId + 'Dropdown');
+                
+                var isShowing = dropdown.classList.contains('hidden');
+
+                // Hide all dropdowns first
+                var allDropdowns = document.querySelectorAll('.dropdown-content');
+                allDropdowns.forEach(function (dropdown) {
+                    dropdown.classList.remove('hidden');
+                });
+
+                // Set inactive of all spans
+                var allSpans = document.querySelectorAll('span');
+                allSpans.forEach(function (span) {
+                    span.classList.remove('active');
+                });
+
+                if (!isShowing) {
+                // Toggle active class for styling
+                span.classList.toggle('active');
+                // Toggle hidden class to move the dropdown vertically
+                dropdown.classList.toggle('hidden');
+                }
+            }
+        </script>
+    </body>
 </html>
