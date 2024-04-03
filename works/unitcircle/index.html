@@ -1,0 +1,141 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
+    <title>OrangeLeafDev</title>
+    <link rel="icon" type="image" href="logo(2x).png">
+    <style>
+      body {
+        font-family: Inconsolata, consolas, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: linear-gradient(to right, #302500, black, #302500);
+        color: #fff;
+      }
+      
+      #navbar {
+        background-color: #000;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        position: flex; /* Make the navbar sticky */
+        top: 0; /* Position it at the top */
+        z-index: 1; /* Set a higher z-index to keep it above other elements */
+      }
+      
+      #navbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+      }
+      
+      #navbar ul li {
+        margin-right: 15px;
+      }
+      
+      #navbar ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 2vw; /* Default font size for desktop */
+      }
+      
+      #navbar ul li a:hover {
+        text-decoration: underline;
+      }
+      
+      #navbar ul li#brand {
+        display: flex;
+        align-items: center;
+      }
+      
+      #navbar ul li#brand a {
+        font-size: 3vw;
+        margin-left: 10px;
+      }
+
+      #navbar img {
+        max-height: 8vw; /* Set the maximum height of the image */
+        margin-left: 10px;
+      }
+      
+      #content {
+        padding: 0px;
+        font-size: 20px;
+        margin-top: 0px; /* Add margin to content to prevent overlap with sticky navbar */
+        text-align: left;
+      }
+      
+      #footer {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+      
+      #footer a {
+        color: #fff;
+        text-decoration: none;
+      }
+      
+      #content a[href] {
+        color: orange !important;
+      }
+      
+      #navbar a[href]:not(.exclude) {
+        background: linear-gradient(to right, #ffaa33, white, white);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+      }
+      
+      #navbar a[href]:not(.exclude):hover {
+        background: linear-gradient(to left, #88ff88, white, white);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        text-decoration: underline;
+      }
+      
+      @media (max-width: 800px) {
+        /* Mobile-specific font size */
+        #navbar ul li a {
+          font-size: 3vw;
+        }
+        
+        #navbar ul li#brand a {
+          font-size: 0; /* Hide the text in mobile view */
+        }
+        
+        #content {
+          font-size: 3vh;
+        }
+        
+      }
+      @font-face {
+        font-family: "pixelconsolas";
+        src: url(piconsolas.woff);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="navbar">
+      <ul>
+        <li id="brand">
+          <a href="/">
+            <img src="https://orangeleafdev.github.io/chiptune/logo(2x).png" style="vertical-align: middle; float: left; margin: 0 -5%;">
+          </a>
+          <a href="/" class="exclude">OrangeLeaf36</a>
+        </li>
+      </ul>
+    </div>
+    <div id="content">
+      <iframe src="Unit Circle Sine & Cosine.html" style="width: 100vw; height: 87.5vh; allowtransparency="true" frameborder="0" scrolling="no" allowfullscreen></iframe>
+    </div>
+  </body>
+</html>
