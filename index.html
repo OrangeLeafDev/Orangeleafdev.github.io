@@ -1,307 +1,274 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <title>OrangeLeaf36</title>
-        <link rel="icon" href="https://orangeleafdev.github.io/chiptune/logo(2x).png">
+        <link rel="icon" href="logo(2x).png">
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap">
-        <style>
-            body {
-                animation: bodyWhite ease 2s;
-                font-family: 'Inconsolata', monospace;
-                margin: 0;
-                overflow: hidden;
-                background-color: black;
-            }
-            canvas {
-                display: block;
-            }
-            #header {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                color: #fff;
-                z-index: 2;
-                max-width: 80%; /* Set a maximum width for the header */
-                margin: 0 calc(auto + 24px); /* Center the header horizontally */
-
-            }
-            #header p {
-                text-align: center;
-                overflow: hidden;
-                white-space: nowrap;
-                position: relative; /* Add relative positioning */
-                /* margin-bottom: 30px; /* Add some space below the <p> */
-            }
-            #name {
-                justify-content: center;
-                align-items: center;
-                display: flex;
-            }
-            #name h1 {
-                margin-top: 35px;
-            }
-            #logo {
-                max-height: 100%;
-                height: auto;
-                display: inline-block; /* Display logo as inline-block */
-                margin-right: 10px; /* Add margin to separate logo from text */
-            }
-            .border {
-                animation: slideOutAnim cubic-bezier(0.4, 0, 0.2, 1) 3s;
-                animation-fill-mode: backwards;
-                position: absolute;
-                width: 100%;
-                background-color: #fff;
-                opacity: 0;
-                z-index: 3;
-            }
-            .border:nth-child(1) {
-                margin-top: 0px;
-            }
-            .border:nth-child(2) {
-                margin-bottom: 0px;
-                transform: translate(0%, calc(100vh - 100%));
-            }
-            @keyframes slideOutAnim {
-                0% {
-                    background-color: #000;
-                    opacity: 1;
-                    height: 50%
-                }
-                25% {
-                    background-color: #fff;
-                    opacity: 1;
-                    height: 50%;
-                }
-                100% {
-                    opacity: 1;
-                    height: 0%;
-                }
-            }
-            
-            img { /* remove blur on pixelated, courtesy of SO */
-                image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
-                image-rendering: -moz-crisp-edges;          /* Firefox                        */
-                image-rendering: -o-crisp-edges;            /* Opera                          */
-                image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
-                image-rendering: pixelated;                 /* Universal support since 2021   */
-                image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
-                -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
-            }
-
-            #header p span {
-                position: relative;
-                display: inline-block;
-                cursor: pointer;
-                padding: 3px;
-                z-index: 2;
-                /* Removes Highlight */
-                -webkit-user-select: none; /* Safari */
-                -ms-user-select: none; /* IE 10 and IE 11 */
-                user-select: none; /* Standard syntax */
-            }
-
-            #header p span::before {
-                content: '';
-                position: absolute;
-                width: 100%;
-                height: 2px;
-                bottom: 0;
-                left: 0;
-                background-color: #fff;
-                color: #fff;
-                transform: scaleX(0);
-                transform-origin: bottom right;
-                transition: transform 0.3s ease-out, background-color 0.3s ease-out;
-            }
-
-            #header p span:nth-child(1)::before {
-                background-color: #e38314; /* Unique color for the first dropdown */
-            }
-
-            #header p span:nth-child(2)::before {
-                background-color: #1ed630; /* Unique color for the second dropdown */
-            }
-
-            #header p span:nth-child(3)::before {
-                background-color: #a731d6; /* Unique color for the third dropdown */
-            }
-
-            #header p span:nth-child(1).active {
-                background-color: #e38314; /* Unique color for the first dropdown */
-            }
-
-            #header p span:nth-child(2).active {
-                background-color: #1ed630; /* Unique color for the second dropdown */
-            }
-
-            #header p span:nth-child(3).active {
-                background-color: #a731d6; /* Unique color for the third dropdown */
-            }
-
-            #header p span:hover::before,
-            #header p span.active::before {
-                transform: scaleX(1);
-                transform-origin: bottom left;
-            }
-
-            .dropdown-content {
-                display: block;
-                position: absolute;
-                background-color: #fff;
-                color: #000;
-                padding: 10px;
-                z-index: 100;
-                width: calc(100% - 20px);
-                top: 0;
-                text-align: center;
-                transform: translateY(calc(37.33 * 4px));
-                opacity: 0;
-                transition: 
-                transform 0.3s ease-in-out,
-                opacity 0.3s ease-in-out
-                ;
-                z-index: 1;
-            }
-            
-
-            .dropdown-content.hidden {
-                transform: translateY(calc(37.33 * 5px));
-                opacity: 1;
-            }
-
-            .latestDate {
-                position: absolute;
-                bottom: 10px;
-                right: 10px;
-                color: white;
-                text-align: right;
-            }
-
-            a:link {
-                color: #e38314;
-                background-color: transparent;
-                text-decoration: none;
-            }
-            a:visited {
-                color: #a731d6;
-                background-color: transparent;
-                text-decoration: none;
-            }
-            a:hover {
-                color: #ffffff;
-                background-color: transparent;
-                text-decoration: underline;
-            }
-            a:active {
-                color: #1ed630;
-                background-color: transparent;
-                text-decoration: underline;
-            }
-            
-            @media (max-width: 800px) {
-                /* Adjust styles for smaller screens */
-                #header {
-                    max-width: 100%; /* Allow header to take full width on smaller screens */
-                }
-            }
-
-        </style>
+        
+        <link rel="stylesheet" href="index.css">
     </head>
     <body>
         <div id="header">
             <div id="name">
-                <img id="logo" src="https://orangeleafdev.github.io/chiptune/logo(4x)-export.png" alt="Your Logo">
+                <img id="logo" src="logo(4x)-export.png" alt="Your Logo">
                 <h1>
                     <span style="color:#e38314">orange</span
                         ><span style="color:#1ed630">leaf</span
-                        ><span style="color:#a731d6">36</span>
+                        ><span style="color:#a731d6">36</span
+                        ><span style="color:#d63131">.dev</span>
                 </h1>
             </div>
             <hr>
             <p>
-                <span id="devSpan" onclick="toggleDropdown('devSpan')">Software Developer</span> | 
-                <span id="composerSpan" onclick="toggleDropdown('composerSpan')">Digital Producer</span> | 
+                <span id="devSpan" onclick="toggleDropdown('devSpan')">Software Developer</span>
+                <span> | </span>
+                <span id="composerSpan" onclick="toggleDropdown('composerSpan')">Music Producer</span>
+                <span> | </span>
                 <span id="artistSpan" onclick="toggleDropdown('artistSpan')">Pixel Artist</span>
+                <span> | </span>
+                <span id="redditSpan" onclick="toggleDropdown('redditSpan')">Subreddit</span>
                 <div id="devSpanDropdown" class="dropdown-content">
                     Game Development <br>
-                    [insert projects] <br>
+                    <div class="container">
+                        <div class="box">
+                            <a href="https://orangeleaf36.itch.io/24colors" target="_blank">
+                                <img src="https://img.itch.zone/aW1nLzEwNTY0MTI1LnBuZw==/315x250%23c/hpd0je.png" alt="Example Image">
+                            </a>
+                            <p>24Colors Pygame</p>
+                        </div>
+                        <div class="box">
+                            <a href="https://orangeleaf36.itch.io/24bitgame" target="_blank">
+                                <img src="https://img.itch.zone/aW1nLzE2ODc0Nzc3LnBuZw==/315x250%23c/mXbKB1.png" alt="Example Image">
+                            </a>
+                            <p>24Colors Legacy</p>
+                        </div>
+                        <div class="box">
+                            <a href="https://orangeleaf36.itch.io/wavedive-corewave" target="_blank">
+                                <img src="https://img.itch.zone/aW1nLzEyOTE5NTAxLnBuZw==/315x250%23c/GhpzdE.png" alt="Example Image">
+                            </a>
+                            <p>WaveDive</p>
+                        </div>
+                    </div> <br>
+                    Prototypes <br>
+                    <div class="container">
+                        <div class="box">
+                            <a href="https://orangeleaf36.is-a.dev/works/pattern_attack" target="_blank">
+                                <img src="pattern_attack.png" alt="Example Image" width="630" height="500">
+                            </a>
+                            <p>Pattern Attack<br>(Game Mechanic Prototype)</p>
+                        </div>
+                        <div class="box">
+                            <a href="https://orangeleaf36.itch.io/thegcfgame-2d" target="_blank">
+                                <img src="https://img.itch.zone/aW1nLzE1NTMzNTc1LnBuZw==/315x250%23c/BpfhPP.png" alt="Example Image" width="630" height="500">
+                            </a>
+                            <p>TheGCFGame<br>(2D Prototype)</p>
+                        </div>
+                        <div class="box">
+                            <a href="https://orangeleaf36.is-a.dev/24bitgame" target="_blank">
+                                <img src="inc_corewave.png" alt="Example Image" width="630" height="500">
+                            </a>
+                            <p>;) (Incremental Corewave)<br>(Prototype)</p>
+                        </div>
+                        <!-- Add more boxes as needed -->
+                    </div> <br>
                     Python projects <br>
-                    [insert project]
+                    [Listings WIP]
                 </div>
                 <div id="composerSpanDropdown" class="dropdown-content">
-                    FL Studio <br>
-                    [insert music] <br>
-                    Ultrabox <br>
-                    [insert music] <br>
+                    Ultrabox / Jummbox <br>
+                    <div class="container" style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr))">
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/BhMkon_pG4k?si=j_Udiy5-_Q5RG4v9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>envExpl - Main Menu</p>
+                        </div>
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy"width="320" height="180" src="https://www.youtube.com/embed/3WUer5uzaUQ?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>LHS - BRD (Cover)</p>
+                        </div>
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/LvNYRu2Ec78?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>random short loop i made </p>
+                        </div>
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/X-sfLLMnV5o?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>an attempt at a simple song</p>
+                        </div>
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/v4XkgA84onk?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>animated oscilloscopes!1!!</p>
+                        </div>
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/Yhi0j-lThEE?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>PWM test</p>
+                        </div>
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/VBKxlKtIxQU?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>a chiptune about green ceiling fans</p>
+                        </div>
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/Gh5B1UxlLdg?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>limbo chiptune waves edition</p>
+                        </div>
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/kJH-0EqiezY?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>thegarbagecan</p>
+                        </div>
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/Bf4HOkNUl-I?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>that time when i ran out of ideas</p>
+                        </div>
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/QmCwLkofuOs?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>C4 for Lunch Extended</p>
+                        </div>
+                    </div> <br>
                     <a href="/chiptune">chiptune</a>
                 </div>
                 <div id="artistSpanDropdown" class="dropdown-content">
                     Aseprite <br>
-                    [insert art] <br>
+                    <div class="container">
+                        <div class="box" title="The 3 Games of Florian Games: The Final Earth 2, CircloO, and Stop the Darkness">
+                            <a href="art1.png" target="_blank">
+                            <img src="art1.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            </a>
+                            <p>The Three Tides</p>
+                        </div>
+                        <div class="box" title="looks convincing">
+                            <a href="art2.png" target="_blank">
+                            <img src="art2.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            </a>
+                            <p>The Yunopian Continent</p>
+                        </div>
+                        <div class="box" title="it's not earth flipped and rotated 90 degrees trust">
+                            <a href="art3.png" target="_blank">
+                            <img src="art3.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            </a>
+                            <p>The Erthian Snapshot</p>
+                        </div>
+                        <div class="box">
+                            <img src="https://placehold.co/250" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            <p>???</p>
+                        </div>
+                        <div class="box">
+                            <img src="https://placehold.co/250" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            <p>???</p>
+                        </div>
+                        <!-- Add more boxes as needed -->
+                    </div>
                     Krita <br>
-                    [insert art] <br>
+                    <div class="container">
+                        <div class="box" title="i made this back in 2021 save me some grace">
+                            <a href="art4.png" target="_blank">
+                            <img src="art4.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            </a>
+                            <p>The Final Earth</p>
+                        </div>
+                        <div class="box" title="my poster for Edukasyon sa Pagpapakatao trust me guys">
+                            <a href="art5.png" target="_blank">
+                            <img src="art5.png" alt="my poster for Edukasyon sa Pagpapakatao trust me guys" style="object-fit: cover;width: 250px; height: 250px;">
+                            </a>
+                            <p>An Interconnected Web</p>
+                        </div>
+                        <div class="box" title="MUAHAHAHAHAHA">
+                            <a href="art6.png" target="_blank">
+                            <img src="art6.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            </a>
+                            <p>Citrus Domination</p>
+                        </div>
+                        <div class="box">
+                            <img src="https://placehold.co/250" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            <p>???</p>
+                        </div>
+                        <div class="box">
+                            <img src="https://placehold.co/250" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            <p>???</p>
+                        </div>
+                        <!-- Add more boxes as needed -->
+                    </div>
                     Canva <br>
-                    [insert design]
+                    <div class="container">
+                        <div class="box">
+                            <img src="https://placehold.co/250" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            <p>???</p>
+                        </div>
+                        <div class="box">
+                            <img src="https://placehold.co/250" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            <p>???</p>
+                        </div>
+                        <div class="box">
+                            <img src="https://placehold.co/250" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            <p>???</p>
+                        </div>
+                        <div class="box">
+                            <img src="https://placehold.co/250" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            <p>???</p>
+                        </div>
+                        <div class="box">
+                            <img src="https://placehold.co/250" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            <p>???</p>
+                        </div>
+                        <!-- Add more boxes as needed -->
+                    </div>
+                </div>
+                <div id="redditSpanDropdown" class="dropdown-content">
+                    <blockquote class="reddit-embed-bq" data-embed-height="250">Posts from the <a href="https://www.reddit.com/r/orangeleafdoes/">orangeleafdoes</a><br> community on Reddit</blockquote><script async="" src="https://embed.reddit.com/widgets.js" charset="UTF-8"></script>
                 </div>
             </p>
-            <h2>Coming Soon</h2>
-            <br>
-            <br>
-            <br>
-            <br>
-            <div style="background-color: #0f0f0f">
-                <a href="https://www.youtube.com/@orangeleaf36plus">yt</a> |
-                <a href="https://twitter.com/ornglef36">twitter</a> |
-                <a href="https://discord.gg/H9q8Q9jE9p">discord</a> |
-                <a href="https://github.com/OrangeLeafDev">github</a> |
-                <a href="/works">my misc works</a> |
-                <a href="https://orangeleafstudios.github.io/">JB Manga</a>
-            </div>
             <!-- Add more sections for projects, skills, etc. -->
         </div>
-        <div class="border">
-
+        <div id="links">
+            <a href="https://www.youtube.com/@orangeleaf36">youtube</a> |
+            <a href="https://twitter.com/ornglef36">twitter</a> |
+            <a href="https://discord.gg/H9q8Q9jE9p">discord</a> |
+            <a href="https://www.reddit.com/user/OrangeLeaf36/">reddit</a> |
+            <a href="https://github.com/OrangeLeafDev">github</a> |
+            <a href="/works">my misc works</a>
+            <!-- <a href="https://orangeleafstudios.github.io/">JB Manga</a> -->
         </div>
-        <div class="border">
+        <div id="borders">
+            <div id="top_border">
 
+            </div>
+            <div id="bottom_border">
+
+            </div>
         </div>
         <div style="z-index: -1;" class="latestDate">
             Updated since:
             <br>
-            8:56 PM (GMT+8)
-            2/21/2024
+            8:21 PM (GMT+8)
+            08/09/2024
         </div>
-        <script>
-            function toggleDropdown(spanId) {
-                var span = document.getElementById(spanId);
-                var dropdown = document.getElementById(spanId + 'Dropdown');
-                
-                var isShowing = dropdown.classList.contains('hidden');
-
-                // Hide all dropdowns first
-                var allDropdowns = document.querySelectorAll('.dropdown-content');
-                allDropdowns.forEach(function (dropdown) {
-                    dropdown.classList.remove('hidden');
-                });
-
-                // Set inactive of all spans
-                var allSpans = document.querySelectorAll('span');
-                allSpans.forEach(function (span) {
-                    span.classList.remove('active');
-                });
-
-                if (!isShowing) {
-                // Toggle active class for styling
-                span.classList.toggle('active');
-                // Toggle hidden class to move the dropdown vertically
-                dropdown.classList.toggle('hidden');
-                }
-            }
+        <script src="index.js">
         </script>
     </body>
 </html>
