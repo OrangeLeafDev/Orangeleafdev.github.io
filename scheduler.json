@@ -1,0 +1,89 @@
+{
+  "06_03_2025": [
+    {
+      "time": "0:00",
+      "str": "Asleep",
+      "col": 0,
+      "desc": "Tell him to GO TO BED!"
+    },
+    {
+      "time": "5:30",
+      "str": "Morning Routine",
+      "col": 1,
+      "desc": "Tell him to GET UP!"
+    },
+    {
+      "time": "6:00",
+      "str": "Walking",
+      "col": 2,
+      "desc": "he should."
+    },
+    {
+      "time": "7:00",
+      "str": "Morning Routine",
+      "col": 1,
+      "desc": "Tell him to get stuff done before starting."
+    },
+    {
+      "time": "8:00",
+      "str": "In-Studio",
+      "col": 4,
+      "desc": "Tell him to STOP PROCRASTINATING!"
+    },
+    {
+      "time": "9:30",
+      "str": "Off-Studio (Break)",
+      "col": 3,
+      "desc": "Discipline is key, and he wants to keep going, but breaks are there for a reason..."
+    },
+    {
+      "time": "10:00",
+      "str": "In-Studio",
+      "col": 4,
+      "desc": "Tell him to STOP PROCRASTINATING!"
+    },
+    {
+      "time": "11:00",
+      "str": "Lunch/Break",
+      "col": 3,
+      "desc": "Tell him to eat the damn food before it gets cold"
+    },
+    {
+      "time": "13:00",
+      "str": "In-Studio",
+      "col": 4,
+      "desc": "Tell him to STOP PROCRASTINATING!"
+    },
+    {
+      "time": "14:30",
+      "str": "Off-Studio (Break)",
+      "col": 3,
+      "desc": "He literally has 2 hours of planned productivity ahead, tell him to take a damn break."
+    },
+    {
+      "time": "15:00",
+      "str": "In-Studio",
+      "col": 4,
+      "desc": "Tell him to STOP PROCRASTINATING!"
+    },
+    {
+      "time": "17:45",
+      "str": "Off-Studio (Closed)",
+      "col": 3,
+      "desc": "Tell him to take a break? The day is over."
+    },
+    {
+      "time": "22:00",
+      "str": "Asleep",
+      "col": 0,
+      "desc": "Tell him to GO TO BED!"
+    },
+    {
+      "time": "24:00",
+      "str": "END OF DAY",
+      "col": 0,
+      "desc": "You shouldn't be reading this."
+    }
+  ],
+  "latest": "06_03_2025"
+}
