@@ -85,5 +85,61 @@
       "desc": "You shouldn't be reading this."
     }
   ],
-  "latest": "06_03_2025"
+  "06_14_2025": [
+    {
+      "time": "0:00",
+      "str": "Asleep",
+      "col": 0,
+      "desc": "Tell him to GO TO BED!"
+    },
+    {
+      "time": "5:30",
+      "str": "Morning Routine",
+      "col": 1,
+      "desc": "Tell him to GET UP!"
+    },
+    {
+      "time": "6:00",
+      "str": "School Prep",
+      "col": 2,
+      "desc": "he should."
+    },
+    {
+      "time": "7:00",
+      "str": "School / Flag Ceremony",
+      "col": 4,
+      "desc": "he. should."
+    },
+    {
+      "time": "7:30",
+      "str": "School",
+      "col": 4,
+      "desc": "he. should."
+    },
+    {
+      "time": "16:30",
+      "str": "Dismissal (Approx.)",
+      "col": 3,
+      "desc": "then school sucks."
+    },
+    {
+      "time": "17:30",
+      "str": "At home",
+      "col": 3,
+      "desc": "he should be home!!! do your homework."
+    },
+    {
+      "time": "22:00",
+      "str": "Asleep",
+      "col": 0,
+      "desc": "Tell him to GO TO BED!"
+    },
+    {
+      "time": "24:00",
+      "str": "END OF DAY",
+      "col": 0,
+      "desc": "You shouldn't be reading this."
+    }
+  ],
+  "latest": "06_14_2025"
 }
