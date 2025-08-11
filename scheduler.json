@@ -117,6 +117,18 @@
       "desc": "they. should."
     },
     {
+      "time": "9:30",
+      "str": "Break",
+      "col": 4,
+      "desc": "I think the teacher went overtime..."
+    },
+    {
+      "time": "10:00",
+      "str": "School",
+      "col": 4,
+      "desc": "they. should."
+    },
+    {
       "time": "12:00",
       "str": "Lunch Break",
       "col": 4,
@@ -174,6 +186,18 @@
     },
     {
       "time": "7:30",
+      "str": "School (Online)",
+      "col": 4,
+      "desc": "they. should."
+    },
+    {
+      "time": "9:30",
+      "str": "Break",
+      "col": 4,
+      "desc": "I think the teacher went overtime..."
+    },
+    {
+      "time": "10:00",
       "str": "School (Online)",
       "col": 4,
       "desc": "they. should."
