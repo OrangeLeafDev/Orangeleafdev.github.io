@@ -117,6 +117,12 @@
       "desc": "they. should."
     },
     {
+      "time": "12:00",
+      "str": "Lunch Break",
+      "col": 4,
+      "desc": "EAT!"
+    },
+    {
       "time": "16:30",
       "str": "Dismissal (Approx.)",
       "col": 3,
@@ -141,5 +147,67 @@
       "desc": "You shouldn't be reading this."
     }
   ],
-  "latest": "06_03_2025"
+  "08_11_2025": [
+    {
+      "time": "0:00",
+      "str": "Asleep",
+      "col": 0,
+      "desc": "Tell him to GO TO BED!"
+    },
+    {
+      "time": "6:00",
+      "str": "Morning Routine",
+      "col": 1,
+      "desc": "Tell him to GET UP!"
+    },
+    {
+      "time": "6:30",
+      "str": "School Prep (Online)",
+      "col": 2,
+      "desc": "they should."
+    },
+    {
+      "time": "7:00",
+      "str": "School / Flag Ceremony (Online)",
+      "col": 4,
+      "desc": "they. should."
+    },
+    {
+      "time": "7:30",
+      "str": "School (Online)",
+      "col": 4,
+      "desc": "they. should."
+    },
+    {
+      "time": "12:00",
+      "str": "Lunch Break",
+      "col": 3,
+      "desc": "EAT!"
+    },
+    {
+      "time": "13:00",
+      "str": "School (Online)",
+      "col": 4,
+      "desc": "they. should."
+    },
+    {
+      "time": "16:30",
+      "str": "Standby/Homework",
+      "col": 3,
+      "desc": "they should not be having class!!! do your homework."
+    },
+    {
+      "time": "22:00",
+      "str": "Asleep",
+      "col": 0,
+      "desc": "Tell him to GO TO BED!"
+    },
+    {
+      "time": "24:00",
+      "str": "END OF DAY",
+      "col": 0,
+      "desc": "You shouldn't be reading this."
+    }
+  ],
+  "latest": "08_11_2025"
 }
