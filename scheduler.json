@@ -119,7 +119,7 @@
     {
       "time": "9:30",
       "str": "Break",
-      "col": 4,
+      "col": 3,
       "desc": "I think the teacher went overtime..."
     },
     {
@@ -131,7 +131,7 @@
     {
       "time": "12:00",
       "str": "Lunch Break",
-      "col": 4,
+      "col": 3,
       "desc": "EAT!"
     },
     {
@@ -193,7 +193,7 @@
     {
       "time": "9:30",
       "str": "Break",
-      "col": 4,
+      "col": 3,
       "desc": "I think the teacher went overtime..."
     },
     {
