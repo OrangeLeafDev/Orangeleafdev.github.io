@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Minecraft Server Monitor — JSON-sourced (Stylized MOTD)</title>
+
+<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+
+<style>
+  :root{
+    /* ----- Layout & typography ----- */
+    --font-family: Inconsolata, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    --font-size: 14px;
+
+    /* ----- Colors ----- */
+    --bg: #292207;
+    --surface: #20180b;
+    --muted: #9aa4b2;
+    --text: #e6eef6;
+    --accent: #a8ce96;
+    --success: #34d399;
+    --danger: #fb7185;
+
+    /* ----- Card / box customisation ----- */
+    --card-radius: 12px;               
+    --card-shadow: 0 8px 24px rgba(16, 23, 2, 0.6); 
+    --card-border: rgba(255,255,255,0.03);
+    --card-padding: 12px 14px;
+    --card-gap: 10px;
+
+    /* ----- Icon ----- */
+    --icon-size: 48px;
+
+    /* ----- MOTD styling ----- */
+    --motd-font-family: Inconsolata, monospace;
+    --motd-font-size: 13px;
+    --motd-line-height: 1.05;
+    --motd-gradient: linear-gradient(90deg, #ffd27f, #a8ce96);
+    --motd-shadow: 0 1px 6px rgba(0,0,0,0.6);
+
+    /* ----- Tooltip ----- */
+    --tooltip-bg: rgba(0,0,0,0.75);
+    --tooltip-color: #fff;
+    --tooltip-radius: 8px;
+
+    /* ----- Small adjustments ----- */
+    --max-card-width: 460px; 
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:var(--font-family);font-size:var(--font-size)}
+  body{background:linear-gradient(180deg,var(--bg), #152404);color:var(--text);padding:20px}
+
+  .wrap{max-width:1100px;margin:0 auto}
+  header{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}
+  header h1{margin:0;font-size:18px}
+  header .hint{color:var(--muted);font-size:13px}
+
+  .cards { display:flex; gap:12px; flex-wrap:wrap; align-items:flex-start; }
+
+  .card {
+    display:inline-grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--card-gap);
+    align-items:start;
+    min-width: 160px;
+    width: max-content;
+    max-width: var(--max-card-width);
+    padding: var(--card-padding);
+    border-radius: var(--card-radius);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
+    cursor: pointer;
+    transition: transform 160ms ease, box-shadow 160ms ease;
+    user-select: none;
+    position: relative;
+  }
+  .card:hover{ transform: translateY(-4px); }
+
+  .icon {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.03);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    flex-shrink:0;
+  }
+  .icon img{width:100%;height:100%;object-fit:cover;display:block}
+
+  .main { min-width:0; }
+
+  .name {
+    font-weight:700;
+    margin:0 0 4px 0;
+    display:flex;
+    gap:8px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  .name .server-name { font-weight:700; }
+  .status {
+    padding:4px 8px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:700;
+  }
+  .status.online{ background:var(--success); color:#042; }
+  .status.offline{ background:var(--danger); color:#300; }
+
+  .players { color:var(--muted); font-size:13px; margin-left:auto; }
+
+  /* MOTD block (stylized). The inner HTML will contain spans with inline colors or classes */
+  .motd {
+    color:var(--muted);
+    font-size:var(--motd-font-size);
+    margin-top:6px;
+    word-break:break-word;
+    white-space:pre-wrap;
+    line-height:var(--motd-line-height);
+    font-family: var(--motd-font-family);
+    letter-spacing: 0.6px;
+    text-shadow: var(--motd-shadow);
+    display:block;
+  }
+
+  /* when API supplies HTML color spans we keep them, but enhance with this rule */
+  .motd span { display:inline-block; padding:0 0.6px; }
+
+  /* add a subtle gradient overlay to the first line if you like (optional) */
+  .motd .fancy {
+    background: var(--motd-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight:700;
+  }
+
+  /* obfuscated / §k simulation */
+  .mc-obf { font-variant-ligatures: none; display:inline-block; }
+
+  /* meta & tooltip */
+  .meta { color:var(--muted); font-size:12px; margin-top:8px; }
+  .tooltip {
+    position:absolute; left:50%; transform:translateX(-50%) translateY(-8px);
+    top:-10px; padding:6px 10px; border-radius:var(--tooltip-radius);
+    background:var(--tooltip-bg); color:var(--tooltip-color); font-size:12px;
+    white-space:nowrap; opacity:0; pointer-events:none; transition:opacity 140ms ease, transform 140ms ease; z-index:10;
+  }
+  .card:hover .tooltip{ opacity:1; transform:translateX(-50%) translateY(-18px); }
+
+  .toast { position:fixed; right:20px; bottom:20px; background: rgba(6,12,24,0.9); color: #fff; padding:8px 12px; border-radius:10px; box-shadow: 0 8px 24px rgba(2,6,23,0.6); font-size:13px; opacity:0; transform:translateY(12px); transition:opacity 180ms ease, transform 180ms ease; z-index:1000; }
+  .toast.show { opacity:1; transform:translateY(0); }
+
+  .controls { display:flex; gap:8px; align-items:center; }
+  .btn { background:var(--accent); color:#042; border:none; padding:8px 10px; border-radius:8px; cursor:pointer; }
+  .link { color:var(--accent); text-decoration:underline; cursor:pointer; background:none;border:0;padding:0;margin-left:6px; }
+
+  @media (max-width:520px){ .cards { gap:10px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Minecraft Monitor</h1>
+      <div class="hint">Servers list comes from <code>servers.json</code>. Hover a box to see the IP; click to copy it.</div>
+    </div>
+    <div class="controls">
+      <button id="refreshBtn" class="btn">Refresh</button>
+      <div style="color:var(--muted);font-size:13px;margin-left:8px">Auto refresh every <select id="interval">
+        <option value="0">off</option>
+        <option value="30">30s</option>
+        <option value="60" selected>60s</option>
+        <option value="120">2m</option>
+      </select></div>
+    </div>
+  </header>
+
+  <main>
+    <div id="cards" class="cards" aria-live="polite"></div>
+    <div id="empty" style="color:var(--muted);margin-top:18px;display:none">No servers found in <code>servers.json</code>.</div>
+  </main>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* Config */
+const SERVERS_JSON = "servers.json";
+const API_BASE = "https://api.mcsrvstat.us/3/";
+
+/* DOM */
+const cardsEl = document.getElementById("cards");
+const emptyEl = document.getElementById("empty");
+const toast = document.getElementById("toast");
+const refreshBtn = document.getElementById("refreshBtn");
+const intervalSel = document.getElementById("interval");
+
+let serversList = [];
+let refreshTimer = null;
+
+/* Toast helper */
+function showToast(msg, ms = 1800){
+  toast.textContent = msg;
+  toast.classList.add("show");
+  clearTimeout(toast._t);
+  toast._t = setTimeout(()=> toast.classList.remove("show"), ms);
+}
+
+/* fetch servers.json */
+async function loadServersJson(){
+  try {
+    const res = await fetch(SERVERS_JSON, {cache: "no-store"});
+    if(!res.ok) throw new Error('Failed to fetch servers.json: ' + res.status);
+    const obj = await res.json();
+    if(!obj || typeof obj !== "object") throw new Error("servers.json is not an object map");
+    return Object.entries(obj).map(([name, addr]) => ({ name, addr }));
+  } catch(err){
+    console.error(err);
+    showToast("Error loading servers.json");
+    return [];
+  }
+}
+
+/* status fetch */
+async function fetchStatus(addr){
+  const url = API_BASE + encodeURIComponent(addr);
+  try {
+    const res = await fetch(url, {cache: "no-store"});
+    if(!res.ok){ const txt = await res.text().catch(()=> ""); throw new Error(`HTTP ${res.status} ${res.statusText} ${txt ? "- " + txt : ""}`); }
+    return await res.json();
+  } catch(err){
+    return { _error: String(err) };
+  }
+}
+
+/* helpers for MOTD formatting */
+
+/* escape HTML */
+function esc(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;"}[c]));
+}
+
+/* map minecraft color codes to hex (approximate) */
+const MC_COLORS = {
+  '0': '#000000','1': '#0000AA','2': '#00AA00','3': '#00AAAA','4': '#AA0000','5': '#AA00AA',
+  '6': '#FFAA00','7': '#AAAAAA','8': '#555555','9': '#5555FF','a': '#55FF55','b': '#55FFFF',
+  'c': '#FF5555','d': '#FF55FF','e': '#FFFF55','f': '#FFFFFF'
+};
+
+/* Parse raw strings with § codes into HTML spans. Accepts an array of strings; returns HTML string */
+function parseMotdRawToHtml(rawArray){
+  if(!rawArray) return "";
+  // join lines with newline; we'll convert newline to <br>
+  const lines = Array.isArray(rawArray) ? rawArray : [rawArray];
+  const parsedLines = lines.map(line => {
+    let out = "";
+    let cur = { color:null, bold:false, italic:false, under:false, strike:false, obf:false };
+    let buf = "";
+    function flush(){
+      if(!buf) return;
+      let style = [];
+      if(cur.color) style.push(`color: ${cur.color}`);
+      if(cur.bold) style.push('font-weight:700');
+      if(cur.italic) style.push('font-style:italic');
+      // underline + strike combined with text-decoration
+      if(cur.under && cur.strike) style.push('text-decoration: underline line-through');
+      else if(cur.under) style.push('text-decoration: underline');
+      else if(cur.strike) style.push('text-decoration: line-through');
+      let cls = cur.obf ? ' class="mc-obf" data-orig="'+esc(buf)+'"' : '';
+      if(style.length) out += `<span style="${style.join(';')}"${cls}>${esc(buf)}</span>`;
+      else out += `<span${cls}>${esc(buf)}</span>`;
+      buf = "";
+    }
+    for(let i=0;i<line.length;i++){
+      const ch = line[i];
+      if(ch === '§' && i+1 < line.length){
+        // code
+        flush();
+        const code = line[++i].toLowerCase();
+        if(code === 'r'){ // reset
+          cur = { color:null, bold:false, italic:false, under:false, strike:false, obf:false };
+        } else if(MC_COLORS.hasOwnProperty(code)){
+          // color resets formatting (except obf is often cleared too)
+          cur.color = MC_COLORS[code];
+          cur.bold = false; cur.italic = false; cur.under = false; cur.strike = false; cur.obf = false;
+        } else {
+          // formatting
+          if(code === 'l') cur.bold = true;
+          else if(code === 'o') cur.italic = true;
+          else if(code === 'n') cur.under = true;
+          else if(code === 'm') cur.strike = true;
+          else if(code === 'k') cur.obf = true;
+          // other codes ignored
+        }
+      } else {
+        buf += ch;
+      }
+    }
+    flush();
+    return out;
+  });
+  return parsedLines.join("<br>");
+}
+
+/* Render MOTD into element. Accepts the motd object from API (may have .html, .clean, .raw). */
+function renderMOTDIntoElement(el, motd){
+  if(!motd){ el.innerHTML = ""; return; }
+  // Prefer motd.html (API-provided HTML with <span style="color: #...">)
+  if(motd.html && motd.html.length){
+    // join lines with <br>. API html is already safe-ish, but it's external content;
+    // since this comes from api.mcsrvstat.us we accept it (docs show safe spans). 
+    el.innerHTML = motd.html.join("<br>");
+    // wrap the first span in fancy class optionally (demonstration)
+    // (We don't alter server-provided spans other than optionally adding .fancy to first line's first span)
+    // find first child and add fancy if you'd like:
+    // const first = el.querySelector('span'); if(first) first.classList.add('fancy');
+    return;
+  }
+  // fallback: convert raw (with § codes) to HTML
+  if(motd.raw && motd.raw.length){
+    el.innerHTML = parseMotdRawToHtml(motd.raw);
+    startObfAnimation(); // ensure obf runs
+    return;
+  }
+  // lastly, use clean (plain text)
+  if(motd.clean && motd.clean.length){
+    // escape and join
+    el.textContent = motd.clean.join("\n");
+    return;
+  }
+  el.textContent = "";
+}
+
+/* --- obfuscated animation for §k (mc-obf) elements --- */
+let _mcObfTicker = null;
+function startObfAnimation(){
+  if(_mcObfTicker) return;
+  const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}<>?/\\|";
+  _mcObfTicker = setInterval(()=>{
+    document.querySelectorAll('.mc-obf').forEach(el => {
+      const orig = el.getAttribute('data-orig') || '';
+      let s = '';
+      for(let i=0;i<orig.length;i++){
+        s += chars[(Math.random()*chars.length)|0];
+      }
+      el.textContent = s;
+    });
+  }, 80);
+}
+
+/* Stop obf if no elements exist (cleanup) */
+function cleanupObfTicker(){
+  if(document.querySelectorAll('.mc-obf').length === 0 && _mcObfTicker){
+    clearInterval(_mcObfTicker);
+    _mcObfTicker = null;
+  }
+}
+
+/* Render single card (name shown; hover IP; click copies) */
+function renderCard(server){
+  const { name, addr } = server;
+  const id = "card-" + cssSafe(name);
+
+  const card = document.createElement("div");
+  card.className = "card";
+  card.id = id;
+  card.setAttribute("role","button");
+  card.setAttribute("tabindex","0");
+  card.title = `Click to copy ${addr}`;
+
+  const icon = document.createElement("div"); icon.className = "icon"; icon.innerHTML = '<div style="font-size:11px;color:var(--muted)">ICON</div>';
+
+  const main = document.createElement("div"); main.className = "main";
+
+  const nameRow = document.createElement("div"); nameRow.className = "name";
+  const nameEl = document.createElement("div"); nameEl.className = "server-name"; nameEl.textContent = name;
+  const statusEl = document.createElement("div"); statusEl.className = "status small"; statusEl.textContent = "…";
+  const playersEl = document.createElement("div"); playersEl.className = "players"; playersEl.textContent = "";
+  nameRow.appendChild(nameEl); nameRow.appendChild(statusEl); nameRow.appendChild(playersEl);
+
+  const motdEl = document.createElement("div"); motdEl.className = "motd";
+  const metaEl = document.createElement("div"); metaEl.className = "meta";
+
+  const tooltip = document.createElement("div"); tooltip.className = "tooltip"; tooltip.textContent = addr;
+
+  main.appendChild(nameRow); main.appendChild(motdEl); main.appendChild(metaEl);
+  card.appendChild(icon); card.appendChild(main); card.appendChild(tooltip);
+
+  card.addEventListener("click", async (e) => {
+    e.stopPropagation();
+    try {
+      await navigator.clipboard.writeText(addr);
+      showToast(`Copied: ${addr}`);
+    } catch(err){
+      showToast("Copy failed (browser blocked clipboard)");
+    }
+  });
+  card.addEventListener("keydown", (e) => { if(e.key === "Enter" || e.key === " ") { e.preventDefault(); card.click(); } });
+
+  cardsEl.appendChild(card);
+
+  (async ()=>{
+    const data = await fetchStatus(addr);
+    updateCard(card, icon, statusEl, playersEl, motdEl, metaEl, data);
+  })();
+
+  return card;
+}
+
+/* Update card UI with API data */
+function updateCard(card, iconEl, statusEl, playersEl, motdEl, metaEl, data){
+  // clear possible obf cleanup later
+  setTimeout(cleanupObfTicker, 500);
+
+  if(data && data._error){
+    statusEl.textContent = "OFFLINE"; statusEl.classList.remove("online"); statusEl.classList.add("offline");
+    playersEl.textContent = ""; motdEl.textContent = ""; metaEl.textContent = data._error;
+    return;
+  }
+
+  const online = !!data.online;
+  const players = data.players && typeof data.players.online === "number" ? data.players.online : null;
+  const max = data.players && typeof data.players.max === "number" ? data.players.max : null;
+  const motdObj = data.motd || null;
+  const version = data.version || data.software || "";
+  const iconData = data.icon || null;
+
+  if(online){
+    statusEl.textContent = "ONLINE"; statusEl.classList.remove("offline"); statusEl.classList.add("online");
+    playersEl.textContent = (players !== null ? `${players}/${max ?? "?"}` : "");
+    renderMOTDIntoElement(motdEl, motdObj);
+  } else {
+    statusEl.textContent = "OFFLINE"; statusEl.classList.remove("online"); statusEl.classList.add("offline");
+    playersEl.textContent = ""; motdEl.textContent = "";
+  }
+
+  if(iconData){
+    iconEl.innerHTML = `<img alt="icon" src="${iconData}">`;
+  }
+
+  const metaParts = [];
+  if(version) metaParts.push(String(version));
+  if(data.map && data.map.clean) metaParts.push(String(data.map.clean));
+  metaEl.textContent = metaParts.join(" • ");
+}
+
+/* Render all servers */
+async function renderAll(){
+  cardsEl.innerHTML = "";
+  serversList = await loadServersJson();
+  if(!serversList.length){ emptyEl.style.display = "block"; return; } else { emptyEl.style.display = "none"; }
+  serversList.forEach(s => renderCard(s));
+}
+
+/* Helpers */
+function cssSafe(text){ return text.replace(/[^a-z0-9_\-]/gi, "_"); }
+
+/* Refresh / auto-refresh */
+refreshBtn.addEventListener("click", () => { renderAll(); });
+intervalSel.addEventListener("change", () => {
+  const secs = Number(intervalSel.value || 0);
+  if(refreshTimer) { clearInterval(refreshTimer); refreshTimer = null; }
+  if(secs > 0){ refreshTimer = setInterval(() => renderAll(), secs * 1000); }
+});
+
+/* Kick off */
+renderAll();
+(function maybeStartAuto(){ const secs = Number(intervalSel.value || 0); if(secs > 0) refreshTimer = setInterval(() => renderAll(), secs * 1000); })();
+</script>
+</body>
+</html>
