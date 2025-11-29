@@ -12,6 +12,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap">
         
+        
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
@@ -29,31 +30,49 @@
             <p>
                 <span id="devSpan" onclick="toggleDropdown('devSpan')">Software Developer</span>
                 <span> | </span>
-                <span id="composerSpan" onclick="toggleDropdown('composerSpan')">Music Producer</span>
+                <span id="composerSpan" onclick="toggleDropdown('composerSpan')">Chiptune Composer</span>
                 <span> | </span>
                 <span id="artistSpan" onclick="toggleDropdown('artistSpan')">Pixel Artist</span>
                 <span> | </span>
                 <span id="redditSpan" onclick="toggleDropdown('redditSpan')">Subreddit</span>
                 <div id="devSpanDropdown" class="dropdown-content">
-                    Game Development <br>
+                    <h2>Gamedev Releases & Prototypes</h2>
                     <div class="container">
+                        <div class="box">
+                            <a href="https://orangeleaf36.itch.io/rebound" target="_blank">
+                                <img src="https://img.itch.zone/aW1nLzIzODAzNjA1LnBuZw==/315x250%23c/wRQ7xn.png" alt="Example Image">
+                            </a>
+                            <p><b>ReBound</b><br>(v0.2 VC 5 Pre-Alpha)</p>
+                        </div>
                         <div class="box">
                             <a href="https://orangeleaf36.itch.io/24colors" target="_blank">
                                 <img src="https://img.itch.zone/aW1nLzEwNTY0MTI1LnBuZw==/315x250%23c/hpd0je.png" alt="Example Image">
                             </a>
-                            <p>24Colors Pygame</p>
+                            <p><b>24Colors Pygame</b><br>(v0.11 Beta Demo)</p>
                         </div>
                         <div class="box">
                             <a href="https://orangeleaf36.itch.io/24bitgame" target="_blank">
                                 <img src="https://img.itch.zone/aW1nLzE2ODc0Nzc3LnBuZw==/315x250%23c/mXbKB1.png" alt="Example Image">
                             </a>
-                            <p>24Colors Legacy</p>
+                            <p><b>24Colors Legacy</b><br>(v0.3.4a)</p>
                         </div>
                         <div class="box">
                             <a href="https://orangeleaf36.itch.io/wavedive-corewave" target="_blank">
                                 <img src="https://img.itch.zone/aW1nLzEyOTE5NTAxLnBuZw==/315x250%23c/GhpzdE.png" alt="Example Image">
                             </a>
-                            <p>WaveDive</p>
+                            <p><b>WaveDive</b><br>(SGJ#06 Release)</p>
+                        </div>
+                        <div class="box">
+                            <a href="https://orangeleaf36.is-a.dev/works/pattern_attack" target="_blank">
+                                <img src="pattern_attack.png" alt="Example Image" width="630" height="500">
+                            </a>
+                            <p><b>Pattern Attack</b><br>(Game Mechanic Prototype)</p>
+                        </div>
+                        <div class="box">
+                            <a href="https://orangeleaf36.itch.io/thegcfgame-2d" target="_blank">
+                                <img src="https://img.itch.zone/aW1nLzE1NTMzNTc1LnBuZw==/315x250%23c/BpfhPP.png" alt="Example Image" width="630" height="500">
+                            </a>
+                            <p><b>TheGCFGame</b><br>(2D Prototype)</p>
                         </div>
                     </div> <br>
                     Prototypes <br>
@@ -70,16 +89,7 @@
                             </a>
                             <p>TheGCFGame<br>(2D Prototype)</p>
                         </div>
-                        <div class="box">
-                            <a href="https://orangeleaf36.is-a.dev/24bitgame" target="_blank">
-                                <img src="inc_corewave.png" alt="Example Image" width="630" height="500">
-                            </a>
-                            <p>;) (Incremental Corewave)<br>(Prototype)</p>
-                        </div>
-                        <!-- Add more boxes as needed -->
                     </div> <br>
-                    Python projects <br>
-                    [Listings WIP]
                 </div>
                 <div id="composerSpanDropdown" class="dropdown-content">
                     Ultrabox / Jummbox <br>
@@ -251,7 +261,7 @@
             <a href="https://discord.gg/H9q8Q9jE9p">discord</a> |
             <a href="https://www.reddit.com/user/OrangeLeaf36/">reddit</a> |
             <a href="https://github.com/OrangeLeafDev">github</a> |
-            <a href="/works">my misc works</a>
+            <a href="works">my misc works</a>
             <!-- <a href="https://orangeleafstudios.github.io/">JB Manga</a> -->
         </div>
         <div id="borders">
@@ -265,9 +275,10 @@
         <div style="z-index: -1;" class="latestDate">
             Updated since:
             <br>
-            8:21 PM (GMT+8)
-            08/09/2024
+            10:15 PM (GMT+8)
+            11/29/2025
         </div>
+        <div class='scrollingBG'></div>
         <script src="index.js">
         </script>
     </body>
