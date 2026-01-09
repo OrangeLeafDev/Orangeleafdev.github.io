@@ -140,7 +140,7 @@ img { /* remove blur on pixelated, courtesy of SO */
     -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
 }
 
-#header p span {
+#header p span.nav {
     position: relative;
     display: inline-block;
     cursor: pointer;
@@ -152,7 +152,7 @@ img { /* remove blur on pixelated, courtesy of SO */
     user-select: none; /* Standard syntax */
 }
 
-#header p span::before {
+#header p span.nav::before {
     content: '';
     position: absolute;
     width: 100%;
@@ -166,40 +166,40 @@ img { /* remove blur on pixelated, courtesy of SO */
     transition: transform 0.3s ease-out, background-color 0.3s ease-out;
 }
 
-#header p span:nth-child(1)::before {
+#header p span.nav:nth-child(1)::before {
     background-color: #e38314; /* Unique color for the first dropdown */
 }
 
-#header p span:nth-child(3)::before {
+#header p span.nav:nth-child(3)::before {
     background-color: #1ed630; /* Unique color for the second dropdown */
 }
 
-#header p span:nth-child(5)::before {
+#header p span.nav:nth-child(5)::before {
     background-color: #a731d6; /* Unique color for the third dropdown */
 }
 
-#header p span:nth-child(7)::before {
+#header p span.nav:nth-child(7)::before {
     background-color: #FF5700; /* Unique color for the third dropdown */
 }
 
-#header p span:nth-child(1).active {
+#header p span.nav:nth-child(1).active {
     background-color: #e38314; /* Unique color for the first dropdown */
 }
 
-#header p span:nth-child(3).active {
+#header p span.nav:nth-child(3).active {
     background-color: #1ed630; /* Unique color for the second dropdown */
 }
 
-#header p span:nth-child(5).active {
+#header p span.nav:nth-child(5).active {
     background-color: #a731d6; /* Unique color for the third dropdown */
 }
 
-#header p span:nth-child(7).active {
+#header p span.nav:nth-child(7).active {
     background-color: #FF5700; /* Unique color for the third dropdown */
 }
 
-#header p span:hover:nth-child(odd)::before,
-#header p span.active:nth-child(odd)::before {
+#header p span.nav:hover:nth-child(odd)::before,
+#header p span.nav.active:nth-child(odd)::before {
     transform: scaleX(1);
     transform-origin: bottom left;
 }
@@ -224,6 +224,7 @@ img { /* remove blur on pixelated, courtesy of SO */
     z-index: 1;
     max-height: 60vh;
     overflow-y: auto;
+    overflow-x: hidden;
     border-radius: 5px;
     border-style: solid;
     border-color: #fff;
@@ -266,6 +267,26 @@ a:active {
     text-decoration: underline;
 }
 
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.highlight-container {
+    display: flex;
+    flex-direction: column; /* explicitly vertical */
+    /*gap: 20px;*/
+    padding: 20px;
+    border-radius: 5px;
+
+    /* remove all constraints that imply wrapping or scrolling */
+    max-height: none;
+    overflow-x: hidden;
+    overflow-y: visible;
+
+    background-color: #111;
+    border: 1px solid #333;
+}
 .container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -321,7 +342,9 @@ a:active {
 
 @media (max-width: 600px) {
     .container {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        overflow-x: hidden;
+        box-sizing: border-box;
     }
 }
 
@@ -349,14 +372,14 @@ a:active {
 }
 
 /* Mobile styles */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 750px) {
     /* Stack spans and remove the "|" */
-    #header p span {
+    #header p span.nav {
         display: block; /* Stack spans vertically on mobile */
     }
 
     /* Hide the "|" on mobile */
-    #header p span:nth-child(even) {
+    #header p span.nav:nth-child(even) {
         display: none; /* Hide the manually added "|" */
     }
 
@@ -368,7 +391,7 @@ a:active {
         left: -10px;
         width: 100%;
         opacity: 0;
-        transform: translateY(calc(37.33 * 4px + 40px));
+        transform: translateY(calc(37.33 * 4px + 50px));
         transition: 
             transform 0.3s ease-in-out,
             opacity 0.3s ease-in-out;
@@ -378,7 +401,7 @@ a:active {
     .dropdown-content.hidden {
         display: block;
         opacity: 1;
-        transform: translateY(calc(37.33 * 5px + 40px));
+        transform: translateY(calc(37.33 * 5px + 50px));
         pointer-events: auto;
     }
 }
@@ -386,11 +409,11 @@ a:active {
 
 /* Styles for larger screens, keeping "|" and absolute dropdowns */
 @media screen and (min-width: 600px) {
-    #header p span + span {
+    #header p span.nav + span.nav {
         display: inline-block; /* Show the "|" between spans */
     }
 
-    #header p span:last-child::after {
+    #header p span.nav:last-child::after {
         content: ''; /* Remove "|" after the last span */
     }
 

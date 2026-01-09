@@ -28,13 +28,13 @@
             </div>
             <hr>
             <p>
-                <span id="devSpan" onclick="toggleDropdown('devSpan')">Software Developer</span>
-                <span> | </span>
-                <span id="composerSpan" onclick="toggleDropdown('composerSpan')">Chiptune Composer</span>
-                <span> | </span>
-                <span id="artistSpan" onclick="toggleDropdown('artistSpan')">Pixel Artist</span>
-                <span> | </span>
-                <span id="redditSpan" onclick="toggleDropdown('redditSpan')">Subreddit</span>
+                <span class="nav" id="devSpan" onclick="toggleDropdown('devSpan')">Software Developer</span>
+                <span class="nav"> | </span>
+                <span class="nav" id="composerSpan" onclick="toggleDropdown('composerSpan')">Chiptune Composer</span>
+                <span class="nav"> | </span>
+                <span class="nav" id="artistSpan" onclick="toggleDropdown('artistSpan')">Pixel Artist</span>
+                <span class="nav"> | </span>
+                <span class="nav" id="aboutMeSpan" onclick="toggleDropdown('aboutMeSpan')">Myself</span>
                 <div id="devSpanDropdown" class="dropdown-content">
                     <h2>Gamedev Releases & Prototypes</h2>
                     <div class="container">
@@ -64,7 +64,7 @@
                         </div>
                         <div class="box">
                             <a href="https://orangeleaf36.is-a.dev/works/pattern_attack" target="_blank">
-                                <img src="pattern_attack.png" alt="Example Image" width="630" height="500">
+                                <img src="art/pattern_attack.png" alt="Example Image" width="630" height="500">
                             </a>
                             <p><b>Pattern Attack</b><br>(Game Mechanic Prototype)</p>
                         </div>
@@ -75,182 +75,341 @@
                             <p><b>TheGCFGame</b><br>(2D Prototype)</p>
                         </div>
                     </div> <br>
-                    Prototypes <br>
-                    <div class="container">
-                        <div class="box">
-                            <a href="https://orangeleaf36.is-a.dev/works/pattern_attack" target="_blank">
-                                <img src="pattern_attack.png" alt="Example Image" width="630" height="500">
-                            </a>
-                            <p>Pattern Attack<br>(Game Mechanic Prototype)</p>
-                        </div>
-                        <div class="box">
-                            <a href="https://orangeleaf36.itch.io/thegcfgame-2d" target="_blank">
-                                <img src="https://img.itch.zone/aW1nLzE1NTMzNTc1LnBuZw==/315x250%23c/BpfhPP.png" alt="Example Image" width="630" height="500">
-                            </a>
-                            <p>TheGCFGame<br>(2D Prototype)</p>
-                        </div>
-                    </div> <br>
                 </div>
                 <div id="composerSpanDropdown" class="dropdown-content">
+                    <!--
+                    https://www.youtube.com/embed/0K-VvAJCL5A /*game over song i made for a friend's game #1 | UltraBox 2.2.15...*/
+                    https://www.youtube.com/embed/KZEjhyqLvYo /*default battle theme i made for a friend's game #2 | UltraBox 2.2.15...*/
+                    https://www.youtube.com/embed/EID7ygJMA28 /*song that plays when my game breaks [Rorre Ed Gnos]*/
+                    https://www.youtube.com/embed/mM4iqGPsLy0 /*the melody stuck inside my head:*/
+                    https://www.youtube.com/embed/nMEclMzIcr8 /*a chiptune about a macrowaves*/
+                    https://www.youtube.com/embed/NrKNrl195U0 /*reusing that one motif/melody be like*/
+                    -->
                     Ultrabox / Jummbox <br>
                     <div class="container" style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr))">
                         <div class="box">
                             <div class="video-wrapper">
-                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/BhMkon_pG4k?si=j_Udiy5-_Q5RG4v9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/NrKNrl195U0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             </div>
-                            <p>envExpl - Main Menu</p>
+                            <p>reusing that one motif/melody be like</p>
                         </div>
                         <div class="box">
                             <div class="video-wrapper">
-                            <iframe loading="lazy"width="320" height="180" src="https://www.youtube.com/embed/3WUer5uzaUQ?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/nMEclMzIcr8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             </div>
-                            <p>LHS - BRD (Cover)</p>
+                            <p>a chiptune about a macrowaves</p>
                         </div>
                         <div class="box">
                             <div class="video-wrapper">
-                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/LvNYRu2Ec78?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/mM4iqGPsLy0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             </div>
-                            <p>random short loop i made </p>
+                            <p>the melody stuck inside my head</p>
                         </div>
                         <div class="box">
                             <div class="video-wrapper">
-                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/X-sfLLMnV5o?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/EID7ygJMA28" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             </div>
-                            <p>an attempt at a simple song</p>
+                            <p>Rorre Ed Gnos</p>
                         </div>
                         <div class="box">
                             <div class="video-wrapper">
-                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/v4XkgA84onk?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/KZEjhyqLvYo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             </div>
-                            <p>animated oscilloscopes!1!!</p>
+                            <p>GuileLapse - Battle Theme</p>
                         </div>
                         <div class="box">
                             <div class="video-wrapper">
-                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/Yhi0j-lThEE?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/0K-VvAJCL5A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             </div>
-                            <p>PWM test</p>
+                            <p>GuileLapse - Game Over...</p>
                         </div>
                         <div class="box">
                             <div class="video-wrapper">
-                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/VBKxlKtIxQU?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/e7y2btAUGoc?si=-dw2db5xNqaSRmC3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             </div>
-                            <p>a chiptune about green ceiling fans</p>
+                            <p>Wavetracker Trailer Cover</p>
                         </div>
                         <div class="box">
                             <div class="video-wrapper">
-                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/Gh5B1UxlLdg?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/QmCwLkofuOs?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             </div>
-                            <p>limbo chiptune waves edition</p>
+                            <p>C4 for Lunch Extended</p>
                         </div>
                         <div class="box">
                             <div class="video-wrapper">
-                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/kJH-0EqiezY?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
-                            <p>thegarbagecan</p>
-                        </div>
-                        <div class="box">
-                            <div class="video-wrapper">
-                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/Bf4HOkNUl-I?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/Bf4HOkNUl-I?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             </div>
                             <p>that time when i ran out of ideas</p>
                         </div>
                         <div class="box">
                             <div class="video-wrapper">
-                            <iframe loading="lazy" width="320" height="180" src="https://www.youtube.com/embed/QmCwLkofuOs?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/kJH-0EqiezY?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             </div>
-                            <p>C4 for Lunch Extended</p>
+                            <p>thegarbagecan</p>
+                        </div>
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/VBKxlKtIxQU?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>a chiptune about green ceiling fans</p>
+                        </div>
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/LvNYRu2Ec78?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>random short loop i made </p>
+                        </div>
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/v4XkgA84onk?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>animated oscilloscopes!1!!</p>
+                        </div>
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/Yhi0j-lThEE?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>PWM test</p>
+                        </div>
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/X-sfLLMnV5o?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>an attempt at a simple song</p>
+                        </div>
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/Gh5B1UxlLdg?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>limbo chiptune waves edition</p>
+                        </div>
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy"width="360" height="240" src="https://www.youtube.com/embed/3WUer5uzaUQ?si=mPUtdILpDPAppIHL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>LHS - BRD (Cover)</p>
+                        </div>
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/BhMkon_pG4k?si=j_Udiy5-_Q5RG4v9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>envExpl - Main Menu</p>
+                        </div>
+                    </div> <br>
+                    FL Studio <br>
+                    <div class="container" style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr))">
+                        <div class="box">
+                            <div class="video-wrapper">
+                            <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/BhMkon_pG4k?si=j_Udiy5-_Q5RG4v9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <p>envExpl - Main Menu</p>
                         </div>
                     </div> <br>
                     <a href="/chiptune">chiptune</a>
                 </div>
                 <div id="artistSpanDropdown" class="dropdown-content">
-                    Aseprite <br>
-                    <div class="container">
-                        <div class="box" title="The 3 Games of Florian Games: The Final Earth 2, CircloO, and Stop the Darkness">
-                            <a href="art1.png" target="_blank">
-                            <img src="art1.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                    <div class="highlight-container">
+                        <h1>Artworks</h1>
+                        Digital illustration, graphics design, pixel art<br>
+                        <h3>
+                        Schoolworks are tagged with <span style="color: #f6ff00;">[SW]</span>! Keep an eye out for them.<br>
+                        Stoneworks (Minecraft Server) art are tagged with <span style="color: #959595;">[SWMC]</span>!
+                        </h3><br>
+                        Protip: Click on the image to see the original size!
+                    </div>
+                    <br>
+                    <h2>Aseprite</h2>
+                    <br>
+                    <div class="highlight-container">
+                        <h2>General art</h2>
+                    <br>
+                        <div class="container">
+                            <div class="box" title="The 3 Games of Florian Games: The Final Earth 2, CircloO, and Stop the Darkness">
+                                <a href="art/art1.png" target="_blank">
+                                <img src="art/art1.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                                </a>
+                                <p>The Three Tides</p>
+                            </div>
+                            <div class="box" title="Happy Holidays 2025! yes, there's two Ls... Please ignore that.">
+                                <a href="art/holidays_art_2026.png" target="_blank">
+                                <img src="art/holidays_art_2026.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                                </a>
+                                <p>Holiday Season 2025</p>
+                            </div>
+                            <div class="box" title="Ya like space parasites?">
+                                <a href="art/factoriocraft_thumbnail1.png" target="_blank">
+                                <img src="art/factoriocraft_thumbnail1.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                                </a>
+                                <p>FactorioCraft S6 Icon</p>
+                            </div>
+                            <div class="box" title="ooh">
+                                <a href="art/orangeleafminecraftsandbox_thumbnail1.png" target="_blank">
+                                <img src="art/orangeleafminecraftsandbox_thumbnail1.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                                </a>
+                                <p>OrangeLeafStudios (pixelated)</p>
+                            </div>
+                            <div class="box" title="schoolwork">
+                                <a href="art/art5.png" target="_blank">
+                                <img src="art/art5.png" alt="my poster for Edukasyon sa Pagpapakatao trust me guys" style="object-fit: cover;width: 250px; height: 250px;">
+                                </a>
+                                <p>An Interconnected Web <span style="color: #f6ff00;">[SW]</span></p>
+                            </div>
+                            <div class="box" title="i made this back in 2021 save me some grace">
+                                <a href="art/art4.png" target="_blank">
+                                <img src="art/art4.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                                </a>
+                                <p>The Final Earth</p>
+                            </div>
+                        </div>
+                        <br>
+                        <h2>The Tangerine Independence (Worldbuilding Art)</h2>
+                        For context, this was part of the old Tangerine Database lore documentation. Links referecing said document will be included in the future.
+                        <br>
+                        <br>
+                        <div class="container">
+                            <div class="box" title="Interdimentional Portal...">
+                                <a href="art/tangertonRelease1.jpeg" target="_blank">
+                                <img src="art/tangertonRelease1.jpeg" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                                </a>
+                                <p>Issue #1</p>
+                            </div>
+                            <div class="box" title="Orange Can Into Space!">
+                                <a href="art/tangertonRelease2.png" target="_blank">
+                                <img src="art/tangertonRelease2.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                                </a>
+                                <p>Issue #2</p>
+                            </div>
+                            <div class="box" title="Ah jeez...">
+                                <a href="art/tangertonRelease3.png" target="_blank">
+                                <img src="art/tangertonRelease3.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                                </a>
+                                <p>Issue #3</p>
+                            </div>
+                        </div>
+                        <br>
+                        <h2>Work In Progress Branding Assets (for preview)</h2>
+                        These weren't supposed to be uploaded yet, but due to schoolwork haste, here it is.
+                        <br>
+                        <br>
+                        <div class="box" title="Ah jeez...">
+                            <a href="art/wip_brand_assets_early2026.png" target="_blank">
+                            <img src="art/wip_brand_assets_early2026.png" alt="Example Image" style="object-fit: contain;width: 1024px; height: 512px;">
                             </a>
-                            <p>The Three Tides</p>
+                            <p>OrangeLeafStudios/OrangeLeaf36 personal branding for 2026</p>
+                        </div>
+                    </div><br>
+                    <h2>Krita</h2> <br>
+                    <div class="container">
+                        <div class="box" title="Kasaysayan...? What's that?">
+                            <a href="https://www.youtube.com/watch?v=r3qEkwlYV_4&list=OLAK5uy_npQt8u26UCikeU9UsNI5BOp1ArjoBcO6Q" target="_blank">
+                            <img src="art/orange_albumcover1.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            </a>
+                            <p>My First Album!</p>
+                        </div>
+                        <div class="box" title="Kasaysayan...? What's that?">
+                            <a href="art/INFOGRAPHIC_CALUZA.png" target="_blank">
+                            <img src="art/INFOGRAPHIC_CALUZA.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            </a>
+                            <p>Sustainable Dev. Infographic <span style="color: #f6ff00;">[SW]</span></p>
                         </div>
                         <div class="box" title="looks convincing">
-                            <a href="art2.png" target="_blank">
-                            <img src="art2.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            <a href="art/art2.png" target="_blank">
+                            <img src="art/art2.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
                             </a>
                             <p>The Yunopian Continent</p>
                         </div>
                         <div class="box" title="it's not earth flipped and rotated 90 degrees trust">
-                            <a href="art3.png" target="_blank">
-                            <img src="art3.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            <a href="art/art3.png" target="_blank">
+                            <img src="art/art3.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
                             </a>
                             <p>The Erthian Snapshot</p>
                         </div>
-                        <div class="box">
-                            <img src="https://placehold.co/250" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
-                            <p>???</p>
-                        </div>
-                        <div class="box">
-                            <img src="https://placehold.co/250" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
-                            <p>???</p>
-                        </div>
-                        <!-- Add more boxes as needed -->
-                    </div>
-                    Krita <br>
-                    <div class="container">
-                        <div class="box" title="i made this back in 2021 save me some grace">
-                            <a href="art4.png" target="_blank">
-                            <img src="art4.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
-                            </a>
-                            <p>The Final Earth</p>
-                        </div>
-                        <div class="box" title="my poster for Edukasyon sa Pagpapakatao trust me guys">
-                            <a href="art5.png" target="_blank">
-                            <img src="art5.png" alt="my poster for Edukasyon sa Pagpapakatao trust me guys" style="object-fit: cover;width: 250px; height: 250px;">
-                            </a>
-                            <p>An Interconnected Web</p>
-                        </div>
                         <div class="box" title="MUAHAHAHAHAHA">
-                            <a href="art6.png" target="_blank">
-                            <img src="art6.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            <a href="art/art6.png" target="_blank">
+                            <img src="art/art6.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
                             </a>
                             <p>Citrus Domination</p>
                         </div>
-                        <div class="box">
-                            <img src="https://placehold.co/250" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
-                            <p>???</p>
-                        </div>
-                        <div class="box">
-                            <img src="https://placehold.co/250" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
-                            <p>???</p>
-                        </div>
                         <!-- Add more boxes as needed -->
-                    </div>
-                    Canva <br>
+                    </div><br>
+                    <h2>Canva</h2> <br>
                     <div class="container">
-                        <div class="box">
-                            <img src="https://placehold.co/250" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
-                            <p>???</p>
+                        <div class="box" title=":]">
+                            <a href="art/biology_poster.png" target="_blank">
+                            <img src="art/biology_poster.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            </a>
+                            <p>Biology Poster (w/Ajax) <span style="color: #f6ff00;">[SW]</span></p>
                         </div>
-                        <div class="box">
-                            <img src="https://placehold.co/250" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
-                            <p>???</p>
+                        <div class="box" title="This Kasaysayan thing is really weird...">
+                            <a href="art/propaganda_sw.png" target="_blank">
+                            <img src="art/propaganda_sw.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            </a>
+                            <p>Democracy Advocacy <span style="color: #f6ff00;">[SW]</span></p>
                         </div>
-                        <div class="box">
-                            <img src="https://placehold.co/250" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
-                            <p>???</p>
+                        <div class="box" title="Huh... a minecraft server about countries?">
+                            <a href="art/stonework_imperial_karzine.png" target="_blank">
+                            <img src="art/stonework_imperial_karzine.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            </a>
+                            <p>Imperial Karzine <span style="color: #959595;">[SWMC]</span></p>
                         </div>
-                        <div class="box">
-                            <img src="https://placehold.co/250" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
-                            <p>???</p>
+                        <div class="box" title="Huh... a minecraft server about countries?">
+                            <a href="art/stoneworks_communist_karzine.png" target="_blank">
+                            <img src="art/stoneworks_communist_karzine.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            </a>
+                            <p>Communist Karzine <span style="color: #959595;">[SWMC]</span></p>
                         </div>
-                        <div class="box">
-                            <img src="https://placehold.co/250" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
-                            <p>???</p>
+                        <div class="box" title="Huh... a minecraft server about countries?">
+                            <a href="art/stoneworks_imperial_lenoria.png" target="_blank">
+                            <img src="art/stoneworks_imperial_lenoria.png" alt="Example Image" style="object-fit: cover;width: 250px; height: 250px;">
+                            </a>
+                            <p>Lenoria <span style="color: #959595;">[SWMC]</span></p>
                         </div>
                         <!-- Add more boxes as needed -->
                     </div>
                 </div>
                 <div id="redditSpanDropdown" class="dropdown-content">
                     <blockquote class="reddit-embed-bq" data-embed-height="250">Posts from the <a href="https://www.reddit.com/r/orangeleafdoes/">orangeleafdoes</a><br> community on Reddit</blockquote><script async="" src="https://embed.reddit.com/widgets.js" charset="UTF-8"></script>
+                </div>
+                <div id="aboutMeSpanDropdown" class="dropdown-content">
+                    <br><h2>About Me</h2><br>
+                    <div class="highlight-container" style="text-align: justify">
+                        <div id="name">
+                            <img id="logo" src="logo(4x)-export.png" alt="Your Logo">
+                            <p style="text-wrap: pretty; text-align: left">Heya! I'm an <span style="color: #ff9204;">orange</span> with a <span style="color: #32ff04;">leaf</span>.<br>You can call me <span style="color: #ff9204;">Orange</span> or <span style="color: #ff9204;">Owen</span>,<br> but I go by Jacob in real life.</p>
+                        </div>
+                        <br>
+                        <h2>How I learned Game Development</h2>
+                        <p style="text-indent: 50px; text-wrap: pretty; text-align: justify">
+                            I've been doing game development since I was around Grade 7. I got my start using Scratch after initially looking for online software I could use to animate. Sure enough, I found this animation suite called Wick Editor, and as it turns out, you could make games. It was in Javascript, which I struggled with at the time knowing nothing about code. I only made basic click adventures where you click an object to go to another frame with the tool asides from normal animations. It was later when I saw this tool on Youtube of someone making a game with code that looked like blocks. This was Scratch, which was a way easier way for me to start making games and learn the logic of how games worked behind the scenes.
+                        </p>
+                        <p style="text-indent: 50px; text-wrap: pretty; text-align: justify">
+                            Later on, Scratch felt too limiting to me as a platform, so I tried my hand at some modifications of Scratch, like E羊icques, until I settled on Turbowarp. As is with the nature of these kinds of game engines and coding platforms, I decided to try out Python. It was very general-purpose, and I really loved the hacker terminal feel to it, as I have previously written text adventures in Windows Batch (the thing that windows uses for scripts, those .bat files yeah) so I got pretty accustomed to it. 
+                        </p>
+                        <p style="text-indent: 50px; text-wrap: pretty; text-align: justify">
+                            To this day, I still use Python because it is a very versatile programming language that can let you write programs from basic terminal interfaces and automation scripts, fun little utility applications and games, to training Artificial Intelligence and making programs that can run websites, databases, and mathematical visualization and statistics.
+                        </p>
+                        <p style="text-indent: 50px; text-wrap: pretty; text-align: justify">
+                             However, due to my goals at the time (that is to make games), I also decided to keep learning other programming languages like JavaScript when I was learning how to make websites (such as the one you're looking at right now!) or C++ when I was figuring out how to interface with an Arduino Uno or an ESP32. I would like to thank my burning passion to make games that are fun not only for me but for others, to introducing me to so many talents from drawing art and illustrations, making animations, learning how computers work, and especially to being able to compose my own songs and play instruments.
+                        </p>
+                    </div>
+                    <br><h2>Skills?</h2>
+                    I mean, just look at the other three tabs as well as the links below, especially my itch.io page.<br>This entire website is basically a portfolio page.<br><br>As of submission, most of all I want to showcase is already there, though I will always continue to add more stuff that I work on. Techincally, I've finished the homework around ~6 years in advance? It's like making the homework before the assignment was given heh
+                    <br><br><h2>Any plans for the future?</h2>
+                    I'm aiming to reach for the big four colleges in my country as well as some alternatives:<br><br>
+                    <div class="container" style="background-color: rgb(255, 255, 255);">
+                        <img src="https://up.edu.ph/wp-content/uploads/2020/01/UP-Seal.png" alt="UP Diliman" style="object-fit: cover;width: 150px; height: 250px;">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5SMFroNhCTLIVr7ynZ0rbaLUo3DgFG2PPnw&s" alt="Ateneo De Manila" style="object-fit: cover;width: 250px; height: 250px;">
+                        <img src="https://www.dlsau.edu.ph/about/university/brandguide/_images/university-logo.png" alt="De La Salle" style="object-fit: cover;width: 250px; height: 250px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/2/24/Seal_of_the_University_of_Santo_Tomas.svg" alt="University of Santo Tomas" style="object-fit: cover;width: 250px; height: 250px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/6/62/FEU_Tech_official_seal.png" alt="Far East University Institute of Technology" style="object-fit: cover;width: 200px; height: 250px;">
+                        <img src="https://www.rootsinterns.com/wp-content/uploads/2024/08/UTM-Logo-1.png" alt="University of Toronto Mississauga" style="object-fit: cover;width: 250px; height: 250px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/250px-Question_mark_%28black%29.svg.png" alt="???" style="object-fit: cover;width: 250px; height: 250px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/250px-Question_mark_%28black%29.svg.png" alt="???" style="object-fit: cover;width: 250px; height: 250px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/250px-Question_mark_%28black%29.svg.png" alt="???" style="object-fit: cover;width: 250px; height: 250px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/250px-Question_mark_%28black%29.svg.png" alt="???" style="object-fit: cover;width: 250px; height: 250px;">
+                    </div>
+                    <br>
+
                 </div>
             </p>
             <!-- Add more sections for projects, skills, etc. -->
@@ -275,8 +434,8 @@
         <div style="z-index: -1;" class="latestDate">
             Updated since:
             <br>
-            10:15 PM (GMT+8)
-            11/29/2025
+            11:59 PM (GMT+8)
+            1/9/2026
         </div>
         <div class='scrollingBG'></div>
         <script src="index.js">
