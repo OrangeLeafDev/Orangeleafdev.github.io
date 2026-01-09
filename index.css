@@ -78,6 +78,17 @@ canvas {
     border-color: #ffffff;
     border-width: 2px;
 }
+#container-links {
+    text-align: center;
+    color: #fff;
+    background-color: #00000044;
+    padding: 8px;
+    z-index: 1;
+    margin: 0 calc(auto + 24px); /* Center the header horizontally */
+    border-style: solid none solid none;
+    border-color: #ffffff;
+    border-width: 2px;
+}
 #name {
     justify-content: center;
     align-items: center;
