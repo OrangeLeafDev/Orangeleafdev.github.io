@@ -233,5 +233,241 @@
       "desc": "You shouldn't be reading this."
     }
   ],
-  "latest": "08_11_2025"
+  "latest": "05_11_2026",
+  "05_11_2026": [
+    {
+      "time": "0:00",
+      "str": "Asleep",
+      "col": 0,
+      "desc": "Tell him to GO TO BED!"
+    },
+    {
+      "time": "5:30",
+      "str": "Awake",
+      "col": 2,
+      "desc": "Tell him to STOP LOOKIN AT HIS DAMN PHONE RAH"
+    },
+    {
+      "time": "5:45",
+      "str": "MR:Shower",
+      "col": 1,
+      "desc": "Get his stinky ass in there"
+    },
+    {
+      "time": "6:10",
+      "str": "MR:Hygene",
+      "col": 1,
+      "desc": "That citrus skin won't brush and wash itself >:["
+    },
+    {
+      "time": "6:20",
+      "str": "Computer Detox",
+      "col": 3,
+      "desc": "tell him to get his ass offline"
+    },
+    {
+      "time": "6:40",
+      "str": "Walk",
+      "col": 1,
+      "desc": "yes."
+    },
+    {
+      "time": "7:00",
+      "str": "Desk Break",
+      "col": 3,
+      "desc": "No working!!!"
+    },
+    {
+      "time": "7:20",
+      "str": "TO-DO Plan",
+      "col": 2,
+      "desc": "Get to planning!"
+    },
+    {
+      "time": "7:30",
+      "str": "Project 1",
+      "col": 4,
+      "desc": "Get to work, pleeb!"
+    },
+    {
+      "time": "8:00",
+      "str": "Break",
+      "col": 3,
+      "desc": "He made this sched., he should follow it!!"
+    },
+    {
+      "time": "8:05",
+      "str": "Project 1",
+      "col": 4,
+      "desc": "Get to work, pleeb!"
+    },
+    {
+      "time": "8:35",
+      "str": "Break",
+      "col": 3,
+      "desc": "He made this sched., he should follow it!!"
+    },
+    {
+      "time": "8:40",
+      "str": "Project 1",
+      "col": 4,
+      "desc": "Get to work, pleeb!"
+    },
+    {
+      "time": "9:10",
+      "str": "Break",
+      "col": 3,
+      "desc": "He made this sched., he should follow it!!"
+    },
+    {
+      "time": "9:15",
+      "str": "Project 1",
+      "col": 4,
+      "desc": "Get to work, pleeb!"
+    },
+    {
+      "time": "9:45",
+      "str": "Break & Assessment",
+      "col": 3,
+      "desc": "He made this sched., he should follow it!!"
+    },
+    {
+      "time": "10:00",
+      "str": "Short Review and/or Test",
+      "col": 4,
+      "desc": "TELL HIM TO REVIEW!!!"
+    },
+    {
+      "time": "10:45",
+      "str": "Break",
+      "col": 3,
+      "desc": "He made this sched., he should follow it!!"
+    },
+    {
+      "time": "10:55",
+      "str": "Do whatev",
+      "col": 3,
+      "desc": "igdaf"
+    },
+    {
+      "time": "11:30",
+      "str": "Lunch Break (& prev.)",
+      "col": 3,
+      "desc": "tell him to EAT :]"
+    },
+    {
+      "time": "13:20",
+      "str": "TO-DO Plan",
+      "col": 2,
+      "desc": "Get to planning!"
+    },
+    {
+      "time": "13:30",
+      "str": "Project 2",
+      "col": 4,
+      "desc": "Get to work, pleeb!"
+    },
+    {
+      "time": "14:00",
+      "str": "Break",
+      "col": 3,
+      "desc": "He made this sched., he should follow it!!"
+    },
+    {
+      "time": "14:05",
+      "str": "Project 2",
+      "col": 4,
+      "desc": "Get to work, pleeb!"
+    },
+    {
+      "time": "14:35",
+      "str": "Break",
+      "col": 3,
+      "desc": "He made this sched., he should follow it!!"
+    },
+    {
+      "time": "14:40",
+      "str": "Project 2",
+      "col": 4,
+      "desc": "Get to work, pleeb!"
+    },
+    {
+      "time": "15:10",
+      "str": "Break",
+      "col": 3,
+      "desc": "He made this sched., he should follow it!!"
+    },
+    {
+      "time": "15:15",
+      "str": "Project 2",
+      "col": 4,
+      "desc": "Get to work, pleeb!"
+    },
+    {
+      "time": "15:45",
+      "str": "Break",
+      "col": 3,
+      "desc": "He made this sched., he should follow it!!"
+    },
+    {
+      "time": "16:00",
+      "str": "Ambiguous/Dinner Break",
+      "col": 3,
+      "desc": "tell him to EAT :]"
+    },
+    {
+      "time": "18:00",
+      "str": "Review Class Prep*/TO-DO Plan",
+      "col": 2,
+      "desc": "tell him to GET READY :] (tues/sat only)"
+    },
+    {
+      "time": "19:00",
+      "str": "Review Class*/Project 3",
+      "col": 4,
+      "desc": "tell him to focus :]"
+    },
+    {
+      "time": "20:15",
+      "str": "Break",
+      "col": 3,
+      "desc": "He made this sched., he should follow it!!"
+    },
+    {
+      "time": "20:30",
+      "str": "Review Class*/Project 3",
+      "col": 4,
+      "desc": "tell him to focus :]"
+    },
+    {
+      "time": "21:30",
+      "str": "Break",
+      "col": 3,
+      "desc": "finally"
+    },
+    {
+      "time": "21:45",
+      "str": "Evening Routine",
+      "col": 1,
+      "desc": "That citrus skin won't brush and wash itself >:["
+    },
+    {
+      "time": "22:15",
+      "str": "Sleep prep",
+      "col": 2,
+      "desc": "honk shooo honk mimimimi"
+    },
+    {
+      "time": "22:30",
+      "str": "Asleep",
+      "col": 0,
+      "desc": "Tell him to GO TO BED!"
+    },
+    {
+      "time": "24:00",
+      "str": "END OF DAY",
+      "col": 0,
+      "desc": "You shouldn't be reading this."
+    }
+  ]
 }
