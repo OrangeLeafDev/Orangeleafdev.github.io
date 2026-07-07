@@ -4,6 +4,16 @@ body {
     margin: 0;
     overflow: hidden;
     background-color: black;
+    color: white; /* Text color */
+    text-shadow: 
+        -1px -1px 0 #000,  
+        0px -1px 0 #000,  
+        1px -1px 0 #000,
+        1px  0px 0 #000,
+        1px  1px 0 #000,
+        0px  1px 0 #000,
+        -1px  1px 0 #000,
+        -1px  0px 0 #000;
 }
 canvas {
     display: block;
@@ -29,12 +39,11 @@ canvas {
   display:flex;
   width:100vw;
   height:100vh;
-  background-image:url("bg2025white.png");
-  background-size: cover;
+  background-image:url("bgTile2026.png");
   background-repeat: repeat;
   position: relative;
   animation: bgScroll 90s linear infinite, fadeIn 5s cubic-bezier(0.78, 0, 0.631, 0.994) forwards;
-  filter: brightness(10%);
+  filter: brightness(80%);
   z-index: -5
 }
 
@@ -90,18 +99,20 @@ canvas {
     border-width: 2px;
 }
 #name {
+    gap: 0px;
     justify-content: center;
     align-items: center;
     display: flex;
 }
 #name h1 {
-    margin-top: 35px;
+    font-size: 2.5em;
+    margin-top: 15px;
 }
 #logo {
     max-height: 100%;
     height: auto;
-    display: inline-block; /* Display logo as inline-block */
-    margin-right: 10px; /* Add margin to separate logo from text */
+    display: inline-block;
+    margin-right: -5px;
 }
 #top_border {
     animation: slideOutAnim cubic-bezier(0.4, 0, 0.2, 1) 3s;
@@ -178,35 +189,35 @@ img { /* remove blur on pixelated, courtesy of SO */
 }
 
 #header p span.nav:nth-child(1)::before {
-    background-color: #e38314; /* Unique color for the first dropdown */
+    background-color: #ff8000; /* Unique color for the first dropdown */
 }
 
 #header p span.nav:nth-child(3)::before {
-    background-color: #1ed630; /* Unique color for the second dropdown */
+    background-color: #00ec18; /* Unique color for the second dropdown */
 }
 
 #header p span.nav:nth-child(5)::before {
-    background-color: #a731d6; /* Unique color for the third dropdown */
+    background-color: #b800ff; /* Unique color for the third dropdown */
 }
 
 #header p span.nav:nth-child(7)::before {
-    background-color: #FF5700; /* Unique color for the third dropdown */
+    background-color: #d63131; /* Unique color for the third dropdown */
 }
 
 #header p span.nav:nth-child(1).active {
-    background-color: #e38314; /* Unique color for the first dropdown */
+    background-color: #ff8000; /* Unique color for the first dropdown */
 }
 
 #header p span.nav:nth-child(3).active {
-    background-color: #1ed630; /* Unique color for the second dropdown */
+    background-color: #00ec18; /* Unique color for the second dropdown */
 }
 
 #header p span.nav:nth-child(5).active {
-    background-color: #a731d6; /* Unique color for the third dropdown */
+    background-color: #b800ff; /* Unique color for the third dropdown */
 }
 
 #header p span.nav:nth-child(7).active {
-    background-color: #FF5700; /* Unique color for the third dropdown */
+    background-color: #d63131; /* Unique color for the third dropdown */
 }
 
 #header p span.nav:hover:nth-child(odd)::before,
@@ -250,11 +261,19 @@ img { /* remove blur on pixelated, courtesy of SO */
 }
 
 .latestDate {
+    display: flex;
+    justify-content: space-between;
+    gap:5px;
+    align-items: center;
     position: absolute;
     bottom: 10px;
     right: 10px;
     color: white;
     text-align: right;
+}
+
+.latestDate img {
+    object-fit: cover;
 }
 
 a:link {
