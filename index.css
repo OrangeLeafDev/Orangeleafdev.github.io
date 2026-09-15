@@ -14,7 +14,14 @@ body {
         0px  1px 0 #000,
         -1px  1px 0 #000,
         -1px  0px 0 #000;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
+
+body.fade-in {
+    opacity: 1;
+}
+
 canvas {
     display: block;
 }
@@ -24,7 +31,7 @@ canvas {
     background-position : 0px 0px
   }
   100% {
-    background-position : -3789px 2149px
+    background-position : -128px 64px
   }
 
 }
@@ -42,7 +49,7 @@ canvas {
   background-image:url("bgTile2026.png");
   background-repeat: repeat;
   position: relative;
-  animation: bgScroll 90s linear infinite, fadeIn 5s cubic-bezier(0.78, 0, 0.631, 0.994) forwards;
+  animation: bgScroll 2s linear infinite, fadeIn 5s cubic-bezier(0.78, 0, 0.631, 0.994) forwards;
   filter: brightness(80%);
   z-index: -5
 }
@@ -61,7 +68,7 @@ canvas {
 }
 
 #header.at_top {
-    top: 20%;
+    top: 15%;
 }
 
 #header p {
@@ -86,6 +93,7 @@ canvas {
     border-style: solid none solid none;
     border-color: #ffffff;
     border-width: 2px;
+    border-radius: 5px;
 }
 #container-links {
     text-align: center;
@@ -115,7 +123,7 @@ canvas {
     margin-right: -5px;
 }
 #top_border {
-    animation: slideOutAnim cubic-bezier(0.4, 0, 0.2, 1) 3s;
+    animation: slideOutAnim cubic-bezier(0.4, 0, 0.2, 1) 3.5s;
     animation-fill-mode: backwards;
     position: absolute;
     width: 100%;
@@ -125,7 +133,7 @@ canvas {
     margin-top: 0px;
 }
 #bottom_border {
-    animation: slideOutAnim cubic-bezier(0.4, 0, 0.2, 1) 3s;
+    animation: slideOutAnim cubic-bezier(0.4, 0, 0.2, 1) 3.5s;
     animation-fill-mode: backwards;
     position: absolute;
     width: 100%;
@@ -141,7 +149,7 @@ canvas {
         opacity: 1;
         height: 50%
     }
-    25% {
+    30% {
         background-color: #fff;
         opacity: 1;
         height: 50%;
@@ -150,6 +158,12 @@ canvas {
         opacity: 1;
         height: 0%;
     }
+}
+
+.skip-border-anim {
+    animation: none !important;
+    opacity: 0 !important;
+    height: 0% !important;
 }
 
 img { /* remove blur on pixelated, courtesy of SO */
@@ -230,21 +244,21 @@ img { /* remove blur on pixelated, courtesy of SO */
     pointer-events: none;
     display: block;
     position: absolute;
-    background-color: #050505;
+    background-color: rgba(5, 5, 5, 0.75);
     color: #fff;
     padding: 10px;
     z-index: 100;
     width: calc(100% - 20px);
     top: 0;
     text-align: center;
-    transform: translateY(calc(37.33 * 4px));
+    transform: translateY(calc(37.33 * 3px));
     opacity: 0;
     transition: 
     transform 0.3s ease-in-out,
     opacity 0.3s ease-in-out
     ;
     z-index: 1;
-    max-height: 60vh;
+    max-height: 75vh;
     overflow-y: auto;
     overflow-x: hidden;
     border-radius: 5px;
@@ -254,7 +268,7 @@ img { /* remove blur on pixelated, courtesy of SO */
 
 
 .dropdown-content.hidden {
-    transform: translateY(calc(37.33 * 5px));
+    transform: translateY(calc(37.33 * 4px));
     opacity: 1;
     pointer-events: auto;
     display: block;
@@ -266,10 +280,14 @@ img { /* remove blur on pixelated, courtesy of SO */
     gap:5px;
     align-items: center;
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 7px;
+    right: 7px;
+    background-color: #0007;
     color: white;
     text-align: right;
+    padding: 5px 8px;
+    border-radius:5px;
+    border:1px solid #4448;
 }
 
 .latestDate img {
@@ -314,7 +332,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     overflow-x: hidden;
     overflow-y: visible;
 
-    background-color: #111;
+    background-color: #111d;
     border: 1px solid #333;
 }
 .container {
@@ -325,7 +343,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     border-radius: 5px;
     overflow-x: auto; /* Scrollbar if content exceeds width */
     /*max-height: calc(100vh - 37.33 * 4px);*/
-    background-color: #222;
+    background-color: #222222ce;
     border-style: solid;
     border-color: #555;
 }
@@ -384,7 +402,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
         font-size: smaller;
     }
     #logo {
-        height: 96px;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        height: 48px;
     }
     #header {
         transform: translate(-50%, -96px);
@@ -394,7 +414,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 @media (min-width: 800px) {
     /* Adjust styles for bigger screens */
     #logo {
-        height: 128px;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        height: 72px;
     }
     #header {
         transform: translate(-50%, -128px);
@@ -421,17 +443,18 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
         left: -10px;
         width: 100%;
         opacity: 0;
-        transform: translateY(calc(37.33 * 4px + 50px));
+        transform: translateY(calc(35 * 4px + 40px));
         transition: 
             transform 0.3s ease-in-out,
             opacity 0.3s ease-in-out;
+        max-height: 65vh;
     }
 
     /* Shown state for dropdowns on mobile */
     .dropdown-content.hidden {
         display: block;
         opacity: 1;
-        transform: translateY(calc(37.33 * 5px + 50px));
+        transform: translateY(calc(35 * 5px + 40px));
         pointer-events: auto;
     }
 }
@@ -449,12 +472,12 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
     .dropdown-content {
         position: absolute; /* Keep dropdown position absolute on larger screens */
-        transform: translateY(calc(37.33 * 4px));
+        transform: translateY(calc(35 * 4px));
         opacity: 0;
     }
 
     .dropdown-content.hidden {
-        transform: translateY(calc(37.33 * 5px));
+        transform: translateY(calc(35 * 5px));
         opacity: 1;
     }
 }

@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&amp;display=swap">
+    <title>Pixel Art Viewer</title>
+    <style>
+      *{box-sizing:border-box;font-family:inconsolata, tahoma}
+      html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#111;color:#fff}
+      body{touch-action:none}
+      #view{display:block;width:100%;height:100%;cursor:grab;image-rendering:pixelated}
+      #view.dragging{cursor:grabbing}
+
+      #status{
+        position:fixed;left:10px;bottom:10px;z-index:2;
+        padding:6px 9px;
+        border:1px solid #444;
+        border-radius:6px;
+        background:#000;
+        color:#fff;
+        font:12px inconsolata, tahoma;
+        pointer-events:none;
+        user-select:none
+      }
+
+      #load{
+        position:fixed;right:10px;top:10px;z-index:3;
+        padding:6px 9px;
+        border:1px solid #555;
+        border-radius:6px;
+        background:#000;
+        color:#fff;
+        font:12px inconsolata, tahoma;
+        cursor:pointer
+      }
+      #load:hover{background:#111;border-color:#888}
+
+      #chooser{
+        position:fixed;left:50%;top:50%;z-index:4;
+        transform:translate(-50%,-50%);
+        display:none;gap:10px;
+        width:min(90vw,560px);
+        padding:14px;
+        border:2px solid #fff;
+        border-radius:8px;
+        background:#000e;
+      }
+
+      #chooser.show{display:grid}
+      #chooser .chooser-header{display:flex;justify-content:space-between;align-items:center}
+      #chooser h3{margin:0}
+      #chooser .urlrow{display:flex;gap:6px}
+
+      #urlInput{
+        flex:1;min-width:0;
+        padding:8px;
+        border:1px solid #444;
+        border-radius:5px;
+        background:#050505;
+        color:#fff
+      }
+      #urlInput:focus{outline:1px solid #888}
+      #urlInput::placeholder{color:#777}
+      #chooser button.close-btn{
+        padding:0;
+        border:none;
+        background:transparent;
+        color:#888;
+        font-size:18px;
+        line-height:1;
+        cursor:pointer
+      }
+      #chooser button.close-btn:hover{
+        background:transparent;
+        border:none;
+        color:#fff
+      }
+      #chooser button{
+        padding:8px 12px;
+        border:1px solid #555;
+        border-radius:5px;
+        background:#222;
+        color:#ddd;
+        cursor:pointer
+      }
+      #chooser button:hover{
+        background:#2a2a2a;
+        border-color:#888
+      }
+
+      #recent{
+        display:flex;
+        gap:8px;
+        overflow-x:auto;
+        padding-top:2px
+      }
+
+      .thumb{
+        position:relative;
+        flex:0 0 auto;
+        width:92px;height:92px;
+        border:1px solid #444;
+        border-radius:5px;
+        background:#111;
+        cursor:pointer;
+        overflow:hidden
+      }
+      .thumb:hover{border-color:#888}
+      .thumb img{
+        width:100%;height:100%;
+        object-fit:contain;
+        image-rendering:pixelated
+      }
+      .thumb span{
+        position:absolute;left:0;right:0;bottom:0;
+        padding:3px 4px;
+        background:#181818dd;
+        color:#ddd;
+        font-size:10px;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis
+      }
+      .empty{font-size:12px;color:#777;padding:6px 0}
+
+      .latestDate {
+          display: flex;
+          justify-content: space-between;
+          gap:5px;
+          align-items: center;
+          position: absolute;
+          bottom: 7px;
+          right: 7px;
+          background-color: #0007;
+          color: white;
+          text-align: right;
+          padding: 5px 8px;
+          border-radius:5px;
+          border:1px solid #4448;
+      }
+
+      .latestDate img {
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="view"></canvas>
+    <button id="load">Load</button>
+    <div id="status"></div>
+
+    <div id="chooser">
+      <div class="chooser-header">
+        <h3>Open Image</h3>
+        <button id="closeBtn" class="close-btn" title="Close">✕</button>
+      </div>
+      <button id="fileBtn">Choose local file</button>
+      <div class="urlrow">
+        <input id="urlInput" type="url" placeholder="https://example.com/image.png">
+        <button id="urlBtn">Open URL</button>
+      </div>
+      <strong>Recent images</strong>
+      <div id="recent"></div>
+    </div>
+
+    <input id="fileInput" type="file" accept="image/*" hidden>
+    <div style="z-index: 1;" class="latestDate">
+      <div>
+        pxl_view
+      <br>
+        <span style="color:#ff8000">orange</span
+        ><span style="color:#00ff1b">leaf</span
+        ><span style="color:#b800ff">36</span>
+      </div>
+      <a href="\"><img src="../logo-small.png" onerror="this.onerror=null; this.src='https://www.orangeleaf36.dev/logo-small.png';"></a>
+    </div>
+    <script>
+      const canvas=document.getElementById("view");
+      const ctx=canvas.getContext("2d",{alpha:false});
+      const status=document.getElementById("status");
+      const loadButton=document.getElementById("load");
+      const chooser=document.getElementById("chooser");
+      const fileInput=document.getElementById("fileInput");
+      const recent=document.getElementById("recent");
+      const urlInput=document.getElementById("urlInput");
+
+      ctx.imageSmoothingEnabled=false;
+
+      const CACHE_LIMIT=5;
+      const CACHE_KEY="pixel_art_viewer_cache";
+      const params=new URLSearchParams(location.search);
+      const src=params.get("image")??params.get("src")??params.get("path")??[...params.values()][0];
+      const image=new Image();
+      image.decoding="async";
+
+      let scale=1,offsetX=0,offsetY=0,imageLoaded=false;
+      let currentCacheId=null;
+
+      const MIN_SCALE=.05,MAX_SCALE=512,FIT_PADDING=.92;
+
+      function getCache(){
+        try{return JSON.parse(localStorage.getItem(CACHE_KEY)||"[]")}catch{return[]}
+      }
+
+      function setCache(items){
+        localStorage.setItem(CACHE_KEY,JSON.stringify(items));
+      }
+
+      function cacheId(){
+        return Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+      }
+
+      function trimCache(items){
+        items.sort((a,b)=>b.time-a.time);
+        return items.slice(0,CACHE_LIMIT);
+      }
+
+      function addCache(entry){
+        let items=getCache().filter(x=>x.id!==entry.id);
+        items.unshift({...entry,time:Date.now()});
+        items=trimCache(items);
+        try{
+          setCache(items);
+        }catch(e){
+          while(items.length>1){
+            items.pop();
+            try{setCache(items);break}catch{}
+          }
+        }
+        renderRecent();
+      }
+
+      function touchCache(id){
+        const items=getCache();
+        const item=items.find(x=>x.id===id);
+        if(!item)return;
+        item.time=Date.now();
+        setCache(trimCache(items));
+        renderRecent();
+      }
+
+      function updateURL(value){
+        const url=new URL(location.href);
+        url.search="";
+        url.searchParams.set("image",value);
+        history.replaceState(null,"",url);
+      }
+
+      function findCache(id){
+        return getCache().find(x=>x.id===id)||null;
+      }
+
+      function sourceToCacheRef(value){
+        if(typeof value!=="string")return null;
+        return value.startsWith("cache:")?value.slice(6):null;
+      }
+
+      function loadSource(source){
+        if(!source)return;
+
+        const id=sourceToCacheRef(source);
+        if(id){
+          const item=findCache(id);
+          if(!item)return showChooser();
+
+          currentCacheId=id;
+          imageLoaded=false;
+          image._requestedSource=item.type==="url"?item.source:null;
+          image._fallback=item.type==="url";
+          image.src=item.data;
+          updateURL(item.type==="url"?item.source:"cache:"+id);
+          touchCache(id);
+          return;
+        }
+
+        currentCacheId=null;
+        imageLoaded=false;
+        image._requestedSource=source;
+        image._fallback=false;
+        image._fallbackData=null;
+        updateURL(source);
+        image.src=source;
+      }
+
+      function saveLocalFile(file){
+        const reader=new FileReader();
+        reader.onload=()=>{
+          const id=cacheId();
+          const data=reader.result;
+          addCache({id,type:"local",name:file.name,data,source:file.name});
+          currentCacheId=id;
+          imageLoaded=false;
+          image._requestedSource=null;
+          image._fallback=false;
+          image.src=data;
+          updateURL("cache:"+id);
+        };
+        reader.readAsDataURL(file);
+      }
+
+      async function saveURL(url){
+        updateURL(url);
+
+        try{
+          const response=await fetch(url,{mode:"cors"});
+          if(!response.ok)throw new Error("HTTP "+response.status);
+          const blob=await response.blob();
+          if(!blob.type.startsWith("image/"))throw new Error("Not an image");
+
+          const reader=new FileReader();
+          reader.onload=()=>{
+            const old=findCacheBySource(url);
+            const id=old?.id||cacheId();
+            addCache({id,type:"url",name:url,data:reader.result,source:url});
+          };
+          reader.readAsDataURL(blob);
+        }catch{}
+
+        currentCacheId=null;
+        imageLoaded=false;
+        image._requestedSource=url;
+        image._fallback=false;
+        image._fallbackData=findCacheBySource(url)?.data||null;
+        image.src=url;
+      }
+
+      function findCacheBySource(source){
+        return getCache().find(x=>x.type==="url"&&x.source===source)||null;
+      }
+
+      function resize(){
+        const dpr=Math.max(1,window.devicePixelRatio||1);
+        canvas.width=Math.round(innerWidth*dpr);
+        canvas.height=Math.round(innerHeight*dpr);
+        canvas.style.width=innerWidth+"px";
+        canvas.style.height=innerHeight+"px";
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+        draw();
+      }
+
+      function fitImage(){
+        if(!imageLoaded)return;
+        scale=Math.min(innerWidth/image.naturalWidth,innerHeight/image.naturalHeight)*FIT_PADDING;
+        scale=Math.max(MIN_SCALE,scale);
+        offsetX=(innerWidth-image.naturalWidth*scale)/2;
+        offsetY=(innerHeight-image.naturalHeight*scale)/2;
+        draw();
+      }
+
+      function draw(){
+        ctx.fillStyle="#000";
+        ctx.fillRect(0,0,innerWidth,innerHeight);
+        if(!imageLoaded)return;
+        ctx.imageSmoothingEnabled=false;
+        ctx.drawImage(image,offsetX,offsetY,image.naturalWidth*scale,image.naturalHeight*scale);
+        const percent=scale*100;
+        status.textContent=`${image.naturalWidth}×${image.naturalHeight}  •  ${percent<1000?percent.toFixed(1):Math.round(percent)}%`;
+      }
+
+      function zoomAt(factor,x,y){
+        const oldScale=scale;
+        const newScale=Math.min(MAX_SCALE,Math.max(MIN_SCALE,scale*factor));
+        if(newScale===oldScale)return;
+        const ix=(x-offsetX)/oldScale,iy=(y-offsetY)/oldScale;
+        scale=newScale;
+        offsetX=x-ix*scale;
+        offsetY=y-iy*scale;
+        draw();
+      }
+
+      function showChooser(){
+        chooser.classList.add("show");
+        renderRecent();
+        urlInput.focus();
+      }
+
+      function hideChooser(){chooser.classList.remove("show")}
+
+      function renderRecent(){
+        const items=trimCache(getCache());
+        recent.innerHTML="";
+        if(!items.length){
+          recent.innerHTML='<div class="empty">No cached images yet.</div>';
+          return;
+        }
+
+        for(const item of items){
+          const button=document.createElement("button");
+          button.className="thumb";
+          button.title=item.name||item.source||"Cached image";
+
+          const img=document.createElement("img");
+          img.src=item.data;
+          img.alt=item.name||"Cached image";
+
+          const label=document.createElement("span");
+          label.textContent=item.name||item.source||"Image";
+
+          button.append(img,label);
+          button.onclick=()=>{
+            loadSource("cache:"+item.id);
+            hideChooser();
+          };
+          recent.appendChild(button);
+        }
+      }
+
+      image.onload=()=>{
+        imageLoaded=true;
+        hideChooser();
+        status.innerHTML=`${image.naturalWidth}×${image.naturalHeight}  •  ${scale*100<1000?(scale*100).toFixed(1):Math.round(scale*100)}%`;
+        status.style.pointerEvents="none";
+        status.style.userSelect="none";
+        status.style.left="10px";
+        status.style.top="auto";
+        status.style.bottom="10px";
+        status.style.transform="none";
+        status.style.padding="6px 9px";
+        status.style.fontFamily="inconsolata, tahoma";
+        fitImage();
+      };
+
+      image.onerror=()=>{
+        if(!image._fallback&&image._fallbackData){
+          image._fallback=true;
+          imageLoaded=false;
+          image.src=image._fallbackData;
+          return;
+        }
+        showChooser();
+      };
+
+      document.getElementById("fileBtn").onclick=()=>fileInput.click();
+      fileInput.onchange=()=>{
+        const file=fileInput.files?.[0];
+        if(file)saveLocalFile(file);
+        fileInput.value="";
+      };
+
+      document.getElementById("urlBtn").onclick=()=>{
+        const url=urlInput.value.trim();
+        if(url)saveURL(url);
+      };
+
+      urlInput.onkeydown=e=>{
+        if(e.key==="Enter")document.getElementById("urlBtn").click();
+        if(e.key==="Escape")hideChooser();
+      };
+
+      loadButton.onclick=showChooser;
+
+      const initialId=sourceToCacheRef(src);
+      if(initialId){
+        const item=findCache(initialId);
+        if(item)loadSource("cache:"+initialId);
+        else showChooser();
+      }else if(src)loadSource(src,true);
+      else showChooser();
+
+      let dragging=false,dragX=0,dragY=0,pointers=new Map();
+
+      canvas.addEventListener("pointerdown",e=>{
+        canvas.setPointerCapture(e.pointerId);
+        pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+        if(pointers.size===1){
+          dragging=true;dragX=e.clientX;dragY=e.clientY;canvas.classList.add("dragging");
+        }
+      });
+
+      canvas.addEventListener("pointermove",e=>{
+        if(!pointers.has(e.pointerId))return;
+        pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+
+        if(pointers.size>=2){
+          const pts=[...pointers.values()],a=pts[0],b=pts[1];
+          const oldDist=Math.hypot(a.x-b.x,a.y-b.y);
+          if(!canvas._pinch){
+            canvas._pinch={dist:oldDist,cx:(a.x+b.x)/2,cy:(a.y+b.y)/2};
+            return;
+          }
+          const pinch=canvas._pinch;
+          if(pinch.dist>0&&oldDist>0){
+            const factor=oldDist/pinch.dist,cx=(a.x+b.x)/2,cy=(a.y+b.y)/2;
+            zoomAt(factor,cx,cy);
+            offsetX+=cx-pinch.cx;
+            offsetY+=cy-pinch.cy;
+            draw();
+          }
+          pinch.dist=oldDist;
+          pinch.cx=(a.x+b.x)/2;
+          pinch.cy=(a.y+b.y)/2;
+          return;
+        }
+
+        if(dragging){
+          offsetX+=e.clientX-dragX;
+          offsetY+=e.clientY-dragY;
+          dragX=e.clientX;
+          dragY=e.clientY;
+          draw();
+        }
+      });
+
+      function endPointer(e){
+        pointers.delete(e.pointerId);
+        if(pointers.size<2)canvas._pinch=null;
+        if(!pointers.size){dragging=false;canvas.classList.remove("dragging")}
+      }
+
+      canvas.addEventListener("pointerup",endPointer);
+      canvas.addEventListener("pointercancel",endPointer);
+
+      canvas.addEventListener("wheel",e=>{
+        e.preventDefault();
+        zoomAt(Math.exp(-e.deltaY*.0015),e.clientX,e.clientY);
+      },{passive:false});
+
+      canvas.addEventListener("dblclick",e=>{
+        const target=scale<2?8:1;
+        zoomAt(target/scale,e.clientX,e.clientY);
+      });
+
+      window.addEventListener("resize",resize);
+
+      window.addEventListener("keydown",e=>{
+        if(!imageLoaded)return;
+        if(e.key==="0")fitImage();
+        else if(e.key==="+"||e.key==="=")zoomAt(1.5,innerWidth/2,innerHeight/2);
+        else if(e.key==="-"||e.key==="_")zoomAt(1/1.5,innerWidth/2,innerHeight/2);
+        else if(e.key==="1")zoomAt(1/scale,innerWidth/2,innerHeight/2);
+      });
+
+      resize();
+      const chooserMenu = document.querySelector('.chooser-menu')
+
+      const closeBtn = document.getElementById("closeBtn");
+      closeBtn.onclick = hideChooser;
+      function hideChooser(){ chooser.classList.remove("show"); }
+    </script>
+  </body>
+</html>

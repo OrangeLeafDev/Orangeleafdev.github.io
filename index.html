@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>OrangeLeaf36</title>
-        <link rel="icon" href="logo(2x).png">
+        <link rel="icon" href="logo_new(2x).png">
         
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,15 +16,26 @@
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
+        <div id="borders">
+            <div id="top_border">
+
+            </div>
+            <div id="bottom_border">
+
+            </div>
+        </div>
         <div id="header">
             <div id="name">
-                <img id="logo" src="logo(4x)-export.png" alt="Your Logo">
+                <!--
+                <img id="logo" src="logo(4x)-export.png" alt="OrangeLeaf36">
                 <h1>
                     <span style="color:#ff8000">orange</span
                         ><span style="color:#00ff1b">leaf</span
                         ><span style="color:#b800ff">36</span
                         ><span style="color:#d63131">.dev</span>
                 </h1>
+                -->
+                <img id="logo" src="nameplate(2x).png" style="display: block; margin-left: auto; margin-right: auto;">
             </div>
             <hr>
             <p>
@@ -33,8 +44,9 @@
                 <span class="nav" id="composerSpan" onclick="toggleDropdown('composerSpan')">Music Composer</span>
                 <span class="nav"> | </span>
                 <span class="nav" id="artistSpan" onclick="toggleDropdown('artistSpan')">Digital/Graphics Artist</span>
-                <span class="nav"> | </span>
+                <!--<span class="nav"> | </span>
                 <span class="nav" id="aboutMeSpan" onclick="toggleDropdown('aboutMeSpan')">Myself</span>
+                -->
                 <div id="devSpanDropdown" class="dropdown-content">
                     <br><h2>Gamedev Releases & Prototypes</h2><br>
                     <div class="container">
@@ -87,7 +99,11 @@
                     -->
                     <br><h2>Spotify</h2><br>
                     <div class="highlight-container" style="text-align: justify">
-                        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/album/7fLMo541DyPpD8DDbcjGaQ?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                        <div class="container" style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr))">
+                            <iframe class="box" data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/album/7fLMo541DyPpD8DDbcjGaQ?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                            <iframe class="box" data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/album/4z9BcSBDwYf6Gi6EteV6eI?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                            <iframe class="box" data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/album/4Ipra3qhyFVFUd4lorT1hz?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                        </div>
                     </div>
                     <br><h2>FL Studio</h2><br>
                     <div class="highlight-container" style="text-align: justify">
@@ -112,6 +128,24 @@
                         <br>
                         Do note that this page only consists of direct embedded pages from Beepbox, Jummbox, and Ultrabox.<br><br>
                         <div class="container" style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr))">
+                            <div class="box">
+                                <div class="video-wrapper">
+                                <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/r3PI7kh4REA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                </div>
+                                <p>▨ (diagonal lines in a square)</p>
+                            </div>
+                            <div class="box">
+                                <div class="video-wrapper">
+                                <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/nA7EytVXt7I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                </div>
+                                <p>Presenting VVVVVV (cover)</p>
+                            </div>
+                            <div class="box">
+                                <div class="video-wrapper">
+                                <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/RvzML8qRrgU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                </div>
+                                <p>shop - nicopatty (cover)</p>
+                            </div>
                             <div class="box">
                                 <div class="video-wrapper">
                                 <iframe loading="lazy" width="360" height="240" src="https://www.youtube.com/embed/NrKNrl195U0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -452,7 +486,7 @@
                         <br><h3>Links to the institutes:</h3><br>
                         <div class="highlight-container" style="text-align: center; justify-content: center; align-items: center;">
                         <div id="container-links" style="font-size: larger;">
-                            <a href="https://up.edu.ph/">UP Diliman</a> |
+                            <a href="https://up.edu.ph/">UP Diliman/Baguio</a> |
                             <a href="https://www.ateneo.edu/">Ateneo De Manila</a> |
                             <a href="https://www.dlsu.edu.ph/">De La Salle</a> |
                             <a href="https://www.ust.edu.ph/">University of Santo Tomas</a> |
@@ -499,20 +533,12 @@
             <a href="citrustree">greyhack site</a>
             <!-- <a href="https://orangeleafstudios.github.io/">JB Manga</a> -->
         </div>
-        <div id="borders">
-            <div id="top_border">
-
-            </div>
-            <div id="bottom_border">
-
-            </div>
-        </div>
         <div style="z-index: -1;" class="latestDate">
             <div>
             Updated since
             <br>
-            8:21 AM (GMT+8)
-            7/7/2026
+            11:05 PM (GMT+8)
+            9/15/2026
             </div>
             <img src="logo-small.png">
         </div>
